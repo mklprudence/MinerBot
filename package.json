@@ -1,0 +1,19 @@
+{
+  "name": "MinerBot",
+  "version": "1.0.0",
+  "description": "Bot dedicated for Miner's Clan",
+  "main": "bot.js",
+  "author": "mklprud3nce",
+  "dependencies": {
+    "discord.io": "github:woor/discord.io#gateway_v6",
+    "winston": "^2.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mklprudence/MinerBot.git"
+  }
+}
