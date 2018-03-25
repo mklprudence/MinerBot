@@ -51,6 +51,10 @@ client.on('message', message => {
                             prefix_MinerClan = config.prefix_MinerClan;
                             message.channel.send(`Prefix resetted back to default: ${prefix_MinerClan}`);
                         }
+                        else if (args[0] == undefined) {
+                            message.channel.send('Please enter a valid prefix!!!');
+                            message.channel.send('Command Usage: m!prefix [NewPrefix]');
+                        }
                         else{
                             prefix_MinerClan = args[0];
                             message.channel.send(`Prefix changed to: ${prefix_MinerClan}`);
@@ -80,6 +84,10 @@ client.on('message', message => {
                         if (args[0] == 'reset') {
                             prefix_PR = config.prefix_PR;
                             message.channel.send(`Prefix resetted back to default: ${prefix_PR}`);
+                        }
+                        else if (args[0] == undefined) {
+                            message.channel.send('Please enter a valid prefix!!!');
+                            message.channel.send('Command Usage: m!prefix [NewPrefix]');
                         }
                         else{
                             prefix_PR = args[0];
