@@ -1,6 +1,6 @@
 // setup global variables
 var prefix = 'm!';
-var devlist = ['mklprud3nce', 'bentuxthecow'];
+var devlist = ['mklprud3nce', 'MineBerserker'];
 
 // require the discord.js module
 const Discord = require('discord.js');
@@ -45,6 +45,17 @@ client.on('message', message => {
                         break;
                 }
                 break;
+
+            // P&R dev Server
+            case '275235526330810369':
+                // sense cmd
+                switch(cmd) {
+                    case 'ping':
+                        message.channel.send('Dev Server ping pong madness!!!');
+                        break;
+                }
+                break;
+
         }
     }
 });
