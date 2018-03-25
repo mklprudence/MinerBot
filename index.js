@@ -62,7 +62,7 @@ client.on('message', message => {
                 // sense cmd
                 switch(cmd) {
                     case 'ping':
-                        message.channel.send('Dev Server ping pong madness!!!');
+                        message.channel.send('Dev Server ping pong madness, test!!!');
                         break;
                 }
             }
