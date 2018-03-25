@@ -29,15 +29,22 @@ client.on('message', message => {
         // cut out args[0] the cmd
         args = args.splice(1);
 
-        // sense cmd
-        switch(cmd) {
-            case 'ping':
-                if (isdev) {
-                    message.channel.send('Pong!');
+        switch(message.guild.id) {
+
+            // Miner's Clan
+            case '417584740758061056':
+                // sense cmd
+                switch(cmd) {
+                    case 'ping':
+                        if (isdev) {
+                            message.channel.send('Pong!');
+                        }
+                        else{
+                            message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
+                        }
+                        break;
                 }
-                else{
-                    message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
-                }
+                break;
         }
     }
 });
