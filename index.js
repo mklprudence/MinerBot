@@ -13,14 +13,14 @@ const client = new Discord.Client();
 // - finishes logging in
 // - reconnects after disconnecting
 client.on('ready', () => {
-    console.log('Ready!');
+    //console.log('Ready!');
 });
 
 // login to Discord with your app's token
 client.login('NDI3MDQxNzkxNDA1OTgxNjk3.DZlWhA.6Ucp6dRD5Qt9eQweTQOiYQhKQPQ');
 
 client.on('message', message => {
-    console.log(message.content);
+    //console.log(message.content);
     if (message.content.substring(0, prefix.length) == prefix) {
         var args = message.content.substring(prefix.length).split(' ');
         var cmd = args[0];
