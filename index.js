@@ -45,6 +45,17 @@ client.on('message', message => {
                             message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
                         }
                         break;
+
+                    case 'prefix':
+                        if (args[0] == 'reset') {
+                            prefix_MinerClan = config.prefix_MinerClan;
+                            message.channel.send(`Prefix resetted back to default: ${prefix_MinerClan}`);
+                        }
+                        else{
+                            prefix_MinerClan = args[0];
+                            message.channel.send(`Prefix changed to: ${prefix_MinerClan}`);
+                        }
+                        break;
                 }
             }
             break;
@@ -63,6 +74,17 @@ client.on('message', message => {
                 switch(cmd) {
                     case 'ping':
                         message.channel.send('Dev Server ping pong madness, test!!!');
+                        break;
+
+                    case 'prefix':
+                        if (args[0] == 'reset') {
+                            prefix_PR = config.prefix_PR;
+                            message.channel.send(`Prefix resetted back to default: ${prefix_PR}`);
+                        }
+                        else{
+                            prefix_PR = args[0];
+                            message.channel.send(`Prefix changed to: ${prefix_PR}`);
+                        }
                         break;
                 }
             }
