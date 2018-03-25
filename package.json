@@ -1,19 +1,31 @@
 {
-  "name": "MinerBot",
+  "name": "minerbot",
   "version": "1.0.0",
-  "description": "Bot dedicated for Miner's Clan",
-  "main": "bot.js",
-  "author": "mklprud3nce",
-  "dependencies": {
-    "discord.io": "github:woor/discord.io#gateway_v6",
-    "winston": "^2.4.1"
-  },
+  "description": "This is a Bot dedicated for Miner's Clan, Skybounds, Minecraft. Created by Clan Developer, mklprudence",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mklprudence/MinerBot.git"
+  },
+  "keywords": [
+    "Miner's",
+    "Clan",
+    "Miner",
+    "MinerBot",
+    "MineBerserker",
+    "mklprudence"
+  ],
+  "author": "mklprudence",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mklprudence/MinerBot/issues"
+  },
+  "homepage": "https://github.com/mklprudence/MinerBot#readme",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "eslint": "^4.19.1"
   }
 }
