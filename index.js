@@ -39,7 +39,7 @@ client.on('message', message => {
                 switch(cmd) {
                     case 'ping':
                         if (isdev) {
-                            message.channel.send('Pong!');
+                            message.channel.send('The Bot Ping: ' + client.ping);
                         }
                         else{
                             message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
@@ -77,7 +77,7 @@ client.on('message', message => {
                 // sense cmd
                 switch(cmd) {
                     case 'ping':
-                        message.channel.send('Dev Server ping pong madness, test!!!');
+                        message.channel.send('The Bot Ping: ' + client.ping);
                         break;
 
                     case 'prefix':
