@@ -60,6 +60,10 @@ client.on('message', message => {
                             message.channel.send(`Prefix changed to: ${prefix_MinerClan}`);
                         }
                         break;
+                    case 'apply':
+                        message.channel.send('Link for Clan Application:');
+                        message.channel.send('https://savage.games/threads/miners-clan.82081/#post-241344');
+                        break;
                 }
             }
             break;
