@@ -150,9 +150,9 @@ client.on('message', message => {
     }
 
     // GamingInc Server
-    if (message.guild.id == '423877278510874644') {
-        if (message.content.substring(0, prefix_MinerClan.length) == prefix_MinerClan) {
-            let args = message.content.substring(prefix_MinerClan.length).split(' ');
+    if (message.guild.id == '423877278510874644' || simServer == 423877278510874644) {
+        if (message.content.substring(0, prefix_GamingInc.length) == prefix_GamingInc) {
+            let args = message.content.substring(prefix_GamingInc.length).split(' ');
             let cmd = args[0];
             let isdev = adminlist_GamingInc.includes(message.author.id);
 
