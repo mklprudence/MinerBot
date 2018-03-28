@@ -71,6 +71,12 @@ client.on('message', message => {
                     message.channel.send('Link for Clan Application:');
                     message.channel.send('https://savage.games/threads/miners-clan.82081/#post-241344');
                     break;
+                case 'pokemon':
+                    if (args[0] == 'initiate') {
+                        message.channel.send('/start');
+                        setTimeout(function() {message.channel.send('/pick Charmander');}, 1000);
+                    }
+                    break;
             }
         }
     }
