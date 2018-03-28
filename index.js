@@ -4,9 +4,9 @@ var simServer = 275235526330810369;
 var simServerName = 'Not Simulating';
 
 // setup devlist
-var devlist_MinerClan = [config.ID_mklprud3nce, config.ID_MineBerserker];
-var devlist_PR = [config.ID_mklprud3nce, config.ID_bentuxthecow];
-var devlist_GamingInc = [config.ID_mklprud3nce, config.ID_JackIsBeast];
+var adminlist_MinerClan = [config.ID_mklprud3nce, config.ID_MineBerserker];
+var adminlist_PR = [config.ID_mklprud3nce, config.ID_bentuxthecow];
+var adminlist_GamingInc = [config.ID_mklprud3nce, config.ID_JackIsBeast];
 
 // setup prefix
 var prefix_default = config.prefix_default;
@@ -38,7 +38,7 @@ client.on('message', message => {
         if (message.content.substring(0, prefix_MinerClan.length) == prefix_MinerClan) {
             let args = message.content.substring(prefix_MinerClan.length).split(' ');
             let cmd = args[0];
-            let isdev = devlist_MinerClan.includes(message.author.id);
+            let isdev = adminlist_MinerClan.includes(message.author.id);
 
             // cut out args[0] the cmd
             args = args.splice(1);
@@ -80,7 +80,7 @@ client.on('message', message => {
         if (message.content.substring(0, prefix_PR.length) == prefix_PR) {
             let args = message.content.substring(prefix_PR.length).split(' ');
             let cmd = args[0];
-            let isdev = devlist_PR.includes(message.author.id);
+            let isdev = adminlist_PR.includes(message.author.id);
 
             // cut out args[0] the cmd
             args = args.splice(1);
@@ -154,7 +154,7 @@ client.on('message', message => {
         if (message.content.substring(0, prefix_MinerClan.length) == prefix_MinerClan) {
             let args = message.content.substring(prefix_MinerClan.length).split(' ');
             let cmd = args[0];
-            let isdev = devlist_GamingInc.includes(message.author.id);
+            let isdev = adminlist_GamingInc.includes(message.author.id);
 
             // cut out args[0] the cmd
             args = args.splice(1);
