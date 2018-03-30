@@ -1,5 +1,8 @@
-// setup global variables
+// setup objects
 const config = require('./config.json');
+const Sequelize = require('sequelize');
+
+// setup global variables
 var simServer = 275235526330810369;
 var simServerName = 'Not Simulating';
 
@@ -20,6 +23,30 @@ const Discord = require('discord.js');
 // create a new Discord client
 const client = new Discord.Client();
 
+// define Sequelize connection
+const sequelize = new Sequelize('database', 'user', 'password', {
+    host: 'localhost',
+    dialect: 'sqlite',
+    logging: false,
+    // SQLite only
+    storage: 'database.sqlite',
+});
+
+// create table 'tags'
+const Tags = sequelize.define('tags', {
+    name: {
+        type: Sequelize.STRING,
+        unique: true,
+    },
+    description: Sequelize.TEXT,
+    username: Sequelize.STRING,
+    usage_count: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: false,
+    },
+});
+
 // when the client is ready, run this code
 // this event will trigger whenever your bot:
 // - finishes logging in
@@ -28,10 +55,14 @@ client.on('ready', () => {
     // console.log('Ready!');
 });
 
+client.once('ready', () => {
+    Tags.sync();
+});
+
 // login to Discord with your app's token
 client.login(config.token);
 
-client.on('message', message => {
+client.on('message', async message => {
 
     // Miner's Clan
     if (message.guild.id == '417584740758061056' || simServer == 417584740758061056) {
@@ -76,6 +107,55 @@ client.on('message', message => {
                         message.channel.send('/start');
                         setTimeout(function() {message.channel.send('/pick Charmander');}, 1000);
                     }
+                    break;
+                case 'addtag':
+                    try{
+                        const tag = await Tags.create({
+                            name: args[0],
+                            description: args[1],
+                            username: message.author.username,
+                        });
+                        return message.reply(`Tag ${tag.name} added.`);
+                    }
+                    catch (e) {
+                        if (e.name === 'SequelizeUniqueConstraintError') {
+                            return message.reply('That tag already exists.');
+                        }
+                        return message.reply('Something went wrong with adding a tag.');
+                    }
+                    break;
+                case 'tag':
+                    const tag = await Tags.findOne({where: { name: args[0]} });
+                    if (tag) {
+                        tag.increment('usage_count');
+                        return message.channel.send(tag.get('description'));
+                    }
+                    return message.reply(`Could not find tag ${args[0]}`);
+                    break;
+                case 'edittag':
+                    const affectedRows = await Tags.update({ description: args[1] }, { where: { name: args[0] } });
+                    if (affectedRows > 0) {
+                        return message.reply(`Tag ${args[0]} was edited.`);
+                    }
+                    return message.reply(`Could not find a tag with name ${args[0]}.`);
+                    break;
+                case 'taginfo':
+                    const taga = await Tags.findOne({ where: { name: args[0] } });
+                    if (taga) {
+                        return message.channel.send(`${args[0]} was created by ${taga.username} at ${taga.createdAt} and has been used ${taga.usage_count} times.`);
+                    }
+                    return message.reply(`Could not find tag: ${args[0]}`);
+                    break;
+                case 'showtags':
+                    const tagList = await Tags.findAll({ attributes: ['name'] });
+                    const tagString = tagList.map(t => t.name).join(', ') || 'No tags set.';
+                    return message.channel.send(`List of tags: ${tagString}`);
+                    break;
+                case 'removetag':
+                    const rowCount = await Tags.destroy({ where: { name: args[0] } });
+                    if (!rowCount) return message.reply('That tag did not exist.');
+                    
+                    return message.reply('Tag deleted.');
                     break;
             }
         }
@@ -167,8 +247,9 @@ client.on('message', message => {
 
             switch (cmd){
                 case 'ping':
-                    if (isdev) {
+                    if (true) {
                         message.channel.send('The Bot Ping: ' + client.ping);
+                        message.channel.send('The Bot Uptime: ' + client.uptime);
                     }
                     else{
                         message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
