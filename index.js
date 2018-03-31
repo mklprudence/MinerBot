@@ -24,13 +24,20 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 // define Sequelize connection
-const sequelize = new Sequelize('database', 'user', 'password', {
-    host: 'localhost',
-    dialect: 'sqlite',
+const sequelize = new Sequelize('database', 'sql12229851', 'XnBWZXbMZ7', {
+    host: 'sql12.freemysqlhosting.net:3306',
+    dialect: 'mysql',
     logging: false,
-    // SQLite only
-    storage: 'database.sqlite',
 });
+
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 // create table 'tags'
 const Tags = sequelize.define('tags', {
