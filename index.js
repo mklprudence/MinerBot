@@ -35,13 +35,11 @@ client.on('message', message => {
 
     // Miner's Clan
     if (message.guild.id == '417584740758061056' || simServer == 417584740758061056) {
-        if (message.content.substring(0, prefix_MinerClan.length) == prefix_MinerClan) {
+        if (message.content.startsWith(prefix_MinerClan)) {
             let args = message.content.substring(prefix_MinerClan.length).split(' ');
-            let cmd = args[0];
+            let cmd = args.shift();
             let isdev = adminlist_MinerClan.includes(message.author.id);
 
-            // cut out args[0] the cmd
-            args = args.splice(1);
             // sense cmd
             switch(cmd) {
                 case 'ping':
