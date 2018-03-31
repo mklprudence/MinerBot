@@ -161,7 +161,7 @@ client.on('message', message => {
 });
 
 client.on('presenceUpdate', (oldMember, newMember)=> {
-    console.log('old:');
+    console.log('old: ');
     console.log(oldMember.presence);
     console.log('new: ');
     console.log(newMember.presence);
