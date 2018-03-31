@@ -163,10 +163,10 @@ client.on('message', message => {
 client.on('presenceUpdate', (oldMember, newMember)=> {
     console.log('old: ');
     console.log(oldMember.user.username);
+    console.log(oldMember.guild);
     console.log(oldMember.presence);
-    console.log('\n');
     console.log('new: ');
     console.log(newMember.user.username);
+    console.log(newMember.guild);
     console.log(newMember.presence);
-    console.log('\n');
 });
