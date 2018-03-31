@@ -25,7 +25,7 @@ const client = new Discord.Client();
 // - finishes logging in
 // - reconnects after disconnecting
 client.on('ready', () => {
-    // console.log('Ready!');
+    console.log('Ready!');
 });
 
 // login to Discord with your app's token
@@ -167,8 +167,9 @@ client.on('message', message => {
 
             switch (cmd){
                 case 'ping':
-                    if (isdev) {
+                    if (true) {
                         message.channel.send('The Bot Ping: ' + client.ping);
+                        message.channel.send('The Bot Uptime: ' + client.uptime);
                     }
                     else{
                         message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
