@@ -41,40 +41,37 @@ client.on('message', message => {
             let isdev = adminlist_MinerClan.includes(message.author.id);
 
             // sense cmd
-            switch(cmd) {
-                case 'ping':
-                    if (isdev) {
-                        message.channel.send('The Bot Ping: ' + client.ping);
-                    }
-                    else{
-                        message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
-                    }
-                    break;
-
-                case 'prefix':
-                    if (args[0] == 'reset') {
-                        prefix_MinerClan = config.prefix_MinerClan;
-                        message.channel.send(`Prefix resetted back to default: ${prefix_MinerClan}`);
-                    }
-                    else if (args[0] == undefined) {
-                        message.channel.send('Please enter a valid prefix!!!');
-                        message.channel.send('Command Usage: m!prefix [NewPrefix]');
-                    }
-                    else{
-                        prefix_MinerClan = args[0];
-                        message.channel.send(`Prefix changed to: ${prefix_MinerClan}`);
-                    }
-                    break;
-                case 'apply':
-                    message.channel.send('Link for Clan Application:');
-                    message.channel.send('https://savage.games/threads/miners-clan.82081/#post-241344');
-                    break;
-                case 'pokemon':
-                    if (args[0] == 'initiate') {
-                        message.channel.send('/start');
-                        setTimeout(function() {message.channel.send('/pick Charmander');}, 1000);
-                    }
-                    break;
+            if (cmd == 'ping') {
+                if (isdev) {
+                    message.channel.send('The Bot Ping: ' + client.ping);
+                }
+                else{
+                    message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
+                }
+            }
+            else if (cmd == 'prefix') {
+                if (args[0] == 'reset') {
+                    prefix_MinerClan = config.prefix_MinerClan;
+                    message.channel.send(`Prefix resetted back to default: ${prefix_MinerClan}`);
+                }
+                else if (args[0] == undefined) {
+                    message.channel.send('Please enter a valid prefix!!!');
+                    message.channel.send('Command Usage: m!prefix [NewPrefix]');
+                }
+                else{
+                    prefix_MinerClan = args[0];
+                    message.channel.send(`Prefix changed to: ${prefix_MinerClan}`);
+                }
+            }
+            else if (cmd == 'apply') {
+                message.channel.send('Link for Clan Application:');
+                message.channel.send('https://savage.games/threads/miners-clan.82081/#post-241344');
+            }
+            else if (cmd == 'pokemon') {
+                if (args[0] == 'initiate') {
+                    message.channel.send('/start');
+                    setTimeout(function() {message.channel.send('/pick Charmander');}, 1000);
+                }
             }
         }
     }
