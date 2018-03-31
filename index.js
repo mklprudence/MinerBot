@@ -24,7 +24,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 // define Sequelize connection
-const sequelize = new Sequelize('database', 'sql12229851', 'XnBWZXbMZ7', {
+const sequelize = new Sequelize('sql12229851', 'sql12229851', 'XnBWZXbMZ7', {
     host: 'sql12.freemysqlhosting.net',
     dialect: 'mysql',
     logging: false,
