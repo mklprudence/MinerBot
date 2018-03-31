@@ -78,7 +78,7 @@ client.on('message', message => {
 
     // P&R dev Server
     if (message.guild.id == '275235526330810369') {
-        if (message.content.startwith(prefix_PR)) {
+        if (message.content.startsWith(prefix_PR)) {
             let args = message.content.substring(prefix_PR.length).split(' ');
             let cmd = args.shift();
             let isdev = adminlist_PR.includes(message.author.id);
@@ -142,7 +142,7 @@ client.on('message', message => {
 
     // GamingInc Server
     if (message.guild.id == '423877278510874644' || simServer == 423877278510874644) {
-        if (message.content.startwith(prefix_GamingInc)) {
+        if (message.content.startsWith(prefix_GamingInc)) {
             let args = message.content.substring(prefix_GamingInc.length).split(' ');
             let cmd = args.shift();
             let isdev = adminlist_GamingInc.includes(message.author.id);
