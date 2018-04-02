@@ -77,10 +77,9 @@ client.on('message', message => {
                 if (isdev) {
                     console.log(args.join(' '));
                     if (args[0].startsWith('<@!') && args[0].endsWith('>')) {
-                        console.log('args[0] is a mention');
                         const mentionID = args[0].slice(3, (args[0].length - 1));
-                        console.log(`The mention id is ${mentionID}`);
-                        console.log(args.join(' '));
+                        console.log(`args[0] is a mention, the mention id is ${mentionID}`);
+                        console.log(`log time is ${new Date().getTime()}`);
                     }
                 }
                 else {
