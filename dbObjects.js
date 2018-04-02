@@ -15,8 +15,12 @@ Users.prototype.login = async function(uptime) {
         return this.save();
     }
     else {
+        this.total_login += (new Date().getTime() - this.current_session_start - uptime);
+        this.last_session_start = this.current_session_start;
+        this.last_session_end = new Date().getTime() - uptime;
         this.current_session_start = new Date().getTime();
         console.log(`${this.user_id} did not logout before login`);
+        return this.save();
     }
 };
 
