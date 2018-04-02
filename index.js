@@ -78,6 +78,8 @@ client.on('message', message => {
                     console.log(args.join(' '));
                     if (args[0].startsWith('<@!') && args[0].endsWith('>')) {
                         console.log('args[0] is a mention');
+                        console.log(`The mention id is ${args[0].slice(3, args[0].length)}`);
+                        console.log(args.join(' '));
                     }
                 }
                 else {
