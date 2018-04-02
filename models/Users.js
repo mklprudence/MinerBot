@@ -5,29 +5,29 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
         },
         total_login: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0,
+            type: DataTypes.STRING,
+            defaultValue: '0',
             allowNull: false,
         },
         last_session_start:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: 0,
+            defaultValue: '0',
         },
         last_session_end:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: 0,
+            defaultValue: '0',
         },
         current_session_start:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: 0,
+            defaultValue: '0',
         },
         login_status:{
             type:DataTypes.BOOLEAN,
             allowNull: false,
-            defaultValue: 0,
+            defaultValue: false,
         },
     }, {
         timestamps: false,

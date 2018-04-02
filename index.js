@@ -37,7 +37,7 @@ Reflect.defineProperty(userSession, 'login', {
         const newUser = await Users.create({
             user_id: id,
             login_status: true,
-            current_session_start: new Date().getTime(),
+            current_session_start: String(new Date().getTime()),
         });
         userSession.set(id, newUser);
         return newUser;
@@ -56,8 +56,9 @@ Reflect.defineProperty(userSession, 'logout', {
         const newUser = await Users.create({
             user_id: id,
             login_status: false,
-            last_session_start: (new Date().getTime() - client.uptime),
-            last_session_end: new Date().getTime(),
+            total_login: String(client.uptime),
+            last_session_start: String((new Date().getTime() - client.uptime)),
+            last_session_end: String(new Date().getTime()),
         });
         userSession.set(id, newUser);
         return newUser;
