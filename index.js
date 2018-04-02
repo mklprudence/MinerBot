@@ -73,6 +73,14 @@ client.on('message', message => {
                     setTimeout(function() {message.channel.send('/pick Charmander');}, 1000);
                 }
             }
+            else if (cmd == 'log') {
+                if (isdev) {
+                    console.log(args.join(' '));
+                }
+                else {
+                    message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
+                }
+            }
         }
     }
 
@@ -160,6 +168,7 @@ client.on('message', message => {
     }
 });
 
+/* testing presenceUpdate
 client.on('presenceUpdate', (oldMember, newMember)=> {
     console.log('old: ');
     console.log(oldMember.user.username);
@@ -169,4 +178,4 @@ client.on('presenceUpdate', (oldMember, newMember)=> {
     console.log(newMember.user.username);
     console.log(newMember.guild.name);
     console.log(newMember.presence);
-});
+});*/
