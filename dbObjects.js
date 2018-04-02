@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize('sql12229851', 'sql12229851', 'XnBWZXbMZ7', {
     host: 'sql12.freemysqlhosting.net/',
-    dialect: 'mySQL',
+    dialect: 'mysql',
     // logging: false,
 });
 
