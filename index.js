@@ -76,6 +76,9 @@ client.on('message', message => {
             else if (cmd == 'log') {
                 if (isdev) {
                     console.log(args.join(' '));
+                    if (args[0].startsWith('<@!') && args[0].endsWith('>')) {
+                        console.log('args[0] is a mention');
+                    }
                 }
                 else {
                     message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
