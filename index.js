@@ -20,6 +20,48 @@ const Discord = require('discord.js');
 // create a new Discord client
 const client = new Discord.Client();
 
+// getting database
+const { Users } = require('./dbObjects');
+const userSession = new Discord.Collection();
+
+// Helper functions
+Reflect.defineProperty(userSession, 'login', {
+    value: async function login(id) {
+        const user = userSession.get(id);
+        if (user) {
+            await Users.findByPrimary(id).login();
+            console.log(`Member with ${id} logged in`);
+            return user.save();
+        }
+        const newUser = await Users.create({
+            user_id: id,
+            login_status: true,
+            current_session_start: new Date().getTime(),
+        });
+        userSession.set(id, newUser);
+        return newUser;
+    },
+});
+
+Reflect.defineProperty(userSession, 'logout', {
+    value: async function logout(id) {
+        const user = userSession.get(id);
+        if (user) {
+            await Users.findByPrimary(id).logout(client.uptime);
+            console.log(`Member with ${id} logged out`);
+            return user.save();
+        }
+        const newUser = await Users.create({
+            user_id: id,
+            login_status: false,
+            last_session_start: (new Date().getTime() - client.uptime),
+            last_session_end: new Date().getTime(),
+        });
+        userSession.set(id, newUser);
+        return newUser;
+    },
+});
+
 // when the client is ready, run this code
 // this event will trigger whenever your bot:
 // - finishes logging in
@@ -28,6 +70,11 @@ client.on('ready', () => {
     console.log('Ready!');
 });
 
+client.once('ready', async () => {
+    const storedUserSession = await Users.findAll();
+    storedUserSession.forEach(s => userSession.set(s.user_id, s));
+    console.log(`Logged in as ${client.user.tag}!`);
+});
 // login to Discord with your app's token
 client.login(config.token);
 
@@ -173,8 +220,9 @@ client.on('message', message => {
     }
 });
 
-/* testing presenceUpdate
+// Update of presence of Users in guild of bot
 client.on('presenceUpdate', (oldMember, newMember)=> {
+    /* test of update using console log
     console.log('old: ');
     console.log(oldMember.user.username);
     console.log(oldMember.guild.name);
@@ -182,5 +230,11 @@ client.on('presenceUpdate', (oldMember, newMember)=> {
     console.log('new: ');
     console.log(newMember.user.username);
     console.log(newMember.guild.name);
-    console.log(newMember.presence);
-});*/
+    console.log(newMember.presence);*/
+    if (oldMember.presence.status == 'offline' && newMember.presence.status != 'offline') {
+        userSession.login(newMember.user.id);
+    }
+    else if (oldMember.presence.status != 'offline' && newMember.presence.status == 'offline') {
+        userSession.logout(newMember.user.id);
+    }
+});
