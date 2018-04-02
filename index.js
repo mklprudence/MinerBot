@@ -29,7 +29,8 @@ Reflect.defineProperty(userSession, 'login', {
     value: async function login(id) {
         const user = userSession.get(id);
         if (user) {
-            await Users.findByPrimary(id).login();
+            const target = await Users.findByPrimary(id);
+            target.login();
             console.log(`Member with ${id} logged in`);
             return user.save();
         }
@@ -47,7 +48,8 @@ Reflect.defineProperty(userSession, 'logout', {
     value: async function logout(id) {
         const user = userSession.get(id);
         if (user) {
-            await Users.findByPrimary(id).logout(client.uptime);
+            const target = await Users.findByPrimary(id);
+            target.logout(client.uptime);
             console.log(`Member with ${id} logged out`);
             return user.save();
         }
