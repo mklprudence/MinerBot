@@ -8,13 +8,14 @@ const sequelize = new Sequelize('sql12229851', 'sql12229851', 'XnBWZXbMZ7', {
 
 const Users = sequelize.import('models/Users');
 
-Users.prototype.login = async function() {
+Users.prototype.login = async function(uptime) {
     if (!this.login_status) {
         this.login_status = true;
         this.current_session_start = new Date().getTime();
-        return Users.save();
+        return this.save();
     }
     else {
+        this.current_session_start = new Date().getTime();
         console.log(`${this.user_id} did not logout before login`);
     }
 };
