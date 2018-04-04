@@ -329,20 +329,35 @@ client.on('message', async message => {
                 const help_ping = [
                     'Obtain the bot status',
                     'Displays Bot ping and uptime',
+                    ' ',
+                    ' ',
+                    ' ',
                 ];
                 const help_login = [
                     '[-PlayerMention]   OPTIONAL   eg. @JackTheBeast',
                     ' ',
                     'If given [-PlayerMention], Bot will display detailed login data of the player',
                     'If not given [-PlayerMention], Bot will display all total login time of all players',
+                    ' ',
+                    ' ',
+                    ' ',
                 ];
                 const help_help = [
                     'Displays this help menu',
+                    ' ',
+                    ' ',
+                    ' ',
+                ];
+                const description = [
+                    `The prefix of the bot is ${prefix_GamingInc}`,
+                    ' ',
+                    ' ',
+                    ' ',
                 ];
                 message.channel.send({ embed: {
                     color: 16514816,
                     title: 'MKLBot Command Help',
-                    description: `The prefix of the bot is ${prefix_GamingInc}`,
+                    description: description.join('\n'),
                     fields: [
                         {
                             name: `${prefix_GamingInc}ping`,
