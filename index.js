@@ -151,7 +151,7 @@ client.on('message', async message => {
                         );
                     }
                     else {
-                        var DB = await Users.findByPrimary(target.id);
+                        const DB = await Users.findByPrimary(target.id);
                         let msg = [];
                         message.channel.send(`Login Session Query of <@!${target.id}> Initiated by <@!${message.author.id}>`);
                         if (target.presence.status != 'offline') {
@@ -287,7 +287,7 @@ client.on('message', async message => {
                         );
                     }
                     else {
-                        var DB = await Users.findByPrimary(target.id);
+                        const DB = await Users.findByPrimary(target.id);
                         let msg = [];
                         message.channel.send(`Login Session Query of <@!${target.id}> Initiated by <@!${message.author.id}>`);
                         if (target.presence.status != 'offline') {
@@ -324,6 +324,9 @@ client.on('message', async message => {
                 else {
                     message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
                 }
+            }
+            else if (cmd == 'help'){
+                const 
             }
         }
     }
