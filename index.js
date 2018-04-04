@@ -234,12 +234,17 @@ client.on('message', async message => {
                     else {
                         var DB = await Users.findByPrimary(target.id);
                         let msg = [];
-                        message.channel.send(target.id);
+                        message.channel.send(`Login Session Query Initiated by <@!${message.author.id}>`);
                         if (target.presence.status != 'offline') {
                             msg = [
                                 `${target.tag}:`,
                                 `Total login: ${Math.floor(Number(DB.total_login) / (1000 * 60 * 60 * 24))} days ${Math.floor((Number(DB.total_login) % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((Number(DB.total_login) % 3600000) / (1000 * 60))} Minutes ${Math.floor((Number(DB.total_login) % 60000) / (1000))} Seconds`,
-                                `Last login is from ${new Date(Number(DB.last_session_start))} to ${new Date(Number(DB.last_session_end))}`,
+                                ' ',
+                                'Last Login Session: ',
+                                `Start: ${new Date(Number(DB.last_session_start))}`,
+                                `End: ${new Date(Number(DB.last_session_end))}`,
+                                ' ',
+                                'Player currently logged in',
                                 `Current login starts at ${new Date(Number(DB.current_session_start))}`,
                             ];
                         }
@@ -247,7 +252,12 @@ client.on('message', async message => {
                             msg = [
                                 `${target.tag}:`,
                                 `Total login: ${Math.floor(Number(DB.total_login) / (1000 * 60 * 60 * 24))} days ${Math.floor((Number(DB.total_login) % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((Number(DB.total_login) % 3600000) / (1000 * 60))} Minutes ${Math.floor((Number(DB.total_login) % 60000) / (1000))} Seconds`,
-                                `Last login is from ${new Date(Number(DB.last_session_start))} to ${new Date(Number(DB.last_session_end))}`,
+                                ' ',
+                                'Last Login Session: ',
+                                `Start: ${new Date(Number(DB.last_session_start))}`,
+                                `End: ${new Date(Number(DB.last_session_end))}`,
+                                ' ',
+                                'Member is currently offline',
                             ];
                         }
                         return message.channel.send(
