@@ -223,11 +223,34 @@ client.on('message', message => {
                 if (isAdmin) {
                     const target = message.mentions.users.first() || 'all';
                     if (target == 'all') {
-                        return message.channel.send(
+                        /* return message.channel.send(
                             userSession.sort((a, b) => b.total_login - a.total_login)
                                 .filter(user => client.users.has(user.user_id))
                                 .map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${Math.floor(user.total_login / (1000 * 60 * 60 * 24))} days ${Math.floor((user.total_login % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((user.total_login % 3600000) / (1000 * 60))} Minutes ${Math.floor((user.total_login % 60000) / (1000))} Seconds`)
                                 .join('\n'),
+                            { code: true }
+                        );*/
+                    }
+                    else {
+                        const DB = Users.findByPrimary(target.id);
+                        let msg = [];
+                        if (DB.login_status) {
+                            msg = [
+                                `${target.tag}:`,
+                                `Total login: ${Math.floor(DB.total_login / (1000 * 60 * 60 * 24))} days ${Math.floor((DB.total_login % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((DB.total_login % 3600000) / (1000 * 60))} Minutes ${Math.floor((DB.total_login % 60000) / (1000))} Seconds`,
+                                `Last login is from ${new Date(DB.last_session_start)} to ${new Date(DB.last_session_end)}`,
+                                `Current login starts at ${new Date(DB.current_session_start)}`,
+                            ];
+                        }
+                        else {
+                            msg = [
+                                `${target.tag}:`,
+                                `Total login: ${Math.floor(DB.total_login / (1000 * 60 * 60 * 24))} days ${Math.floor((DB.total_login % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((DB.total_login % 3600000) / (1000 * 60))} Minutes ${Math.floor((DB.total_login % 60000) / (1000))} Seconds`,
+                                `Last login is from ${new Date(DB.last_session_start)} to ${new Date(DB.last_session_end)}`,
+                            ];
+                        }
+                        return message.channel.send(
+                            msg.join('\n'),
                             { code: true }
                         );
                     }
