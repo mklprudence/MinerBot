@@ -277,6 +277,7 @@ client.on('message', async message => {
                     const target = message.mentions.users.first() || 'all';
                     if (target == 'all') {
                         message.channel.send(`Login Session Query of All Member of ${message.guild.name} Initiated by <@!${message.author.id}>`);
+                        message.channel.send('**The total online time excludes the current session**');
                         return message.channel.send(
                             userSession.sort((a, b) => b.total_login - a.total_login)
                                 .filter(user => client.users.has(user.user_id))
@@ -290,10 +291,11 @@ client.on('message', async message => {
                         const DB = await Users.findByPrimary(target.id);
                         let msg = [];
                         message.channel.send(`Login Session Query of <@!${target.id}> Initiated by <@!${message.author.id}>`);
+                        message.channel.send('**The total online time excludes the current session**');
                         if (target.presence.status != 'offline') {
                             msg = [
                                 `${target.tag}:`,
-                                `Total login: ${Math.floor(Number(DB.total_login) / (1000 * 60 * 60 * 24))} days ${Math.floor((Number(DB.total_login) % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((Number(DB.total_login) % 3600000) / (1000 * 60))} Minutes ${Math.floor((Number(DB.total_login) % 60000) / (1000))} Seconds`,
+                                `Total online time: ${Math.floor(Number(DB.total_login) / (1000 * 60 * 60 * 24))} days ${Math.floor((Number(DB.total_login) % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((Number(DB.total_login) % 3600000) / (1000 * 60))} Minutes ${Math.floor((Number(DB.total_login) % 60000) / (1000))} Seconds`,
                                 ' ',
                                 'Last Login Session: ',
                                 `Start: ${new Date(Number(DB.last_session_start))}`,
@@ -306,7 +308,7 @@ client.on('message', async message => {
                         else {
                             msg = [
                                 `${target.tag}:`,
-                                `Total login: ${Math.floor(Number(DB.total_login) / (1000 * 60 * 60 * 24))} days ${Math.floor((Number(DB.total_login) % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((Number(DB.total_login) % 3600000) / (1000 * 60))} Minutes ${Math.floor((Number(DB.total_login) % 60000) / (1000))} Seconds`,
+                                `Total online time: ${Math.floor(Number(DB.total_login) / (1000 * 60 * 60 * 24))} days ${Math.floor((Number(DB.total_login) % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((Number(DB.total_login) % 3600000) / (1000 * 60))} Minutes ${Math.floor((Number(DB.total_login) % 60000) / (1000))} Seconds`,
                                 ' ',
                                 'Last Login Session: ',
                                 `Start: ${new Date(Number(DB.last_session_start))}`,
