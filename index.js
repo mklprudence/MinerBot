@@ -20,6 +20,51 @@ const Discord = require('discord.js');
 // create a new Discord client
 const client = new Discord.Client();
 
+// getting database
+const { Users } = require('./dbObjects');
+const userSession = new Discord.Collection();
+
+// Helper functions
+Reflect.defineProperty(userSession, 'login', {
+    value: async function login(id) {
+        const user = userSession.get(id);
+        if (user) {
+            const target = await Users.findByPrimary(id);
+            target.login(client.uptime);
+            console.log(`Member with ${id} logged in`);
+            return user.save();
+        }
+        const newUser = await Users.create({
+            user_id: id,
+            login_status: true,
+            current_session_start: String(new Date().getTime()),
+        });
+        userSession.set(id, newUser);
+        return newUser;
+    },
+});
+
+Reflect.defineProperty(userSession, 'logout', {
+    value: async function logout(id) {
+        const user = userSession.get(id);
+        if (user) {
+            const target = await Users.findByPrimary(id);
+            target.logout(client.uptime);
+            console.log(`Member with ${id} logged out`);
+            return user.save();
+        }
+        const newUser = await Users.create({
+            user_id: id,
+            login_status: false,
+            total_login: String(client.uptime),
+            last_session_start: String((new Date().getTime() - client.uptime)),
+            last_session_end: String(new Date().getTime()),
+        });
+        userSession.set(id, newUser);
+        return newUser;
+    },
+});
+
 // when the client is ready, run this code
 // this event will trigger whenever your bot:
 // - finishes logging in
@@ -28,21 +73,26 @@ client.on('ready', () => {
     console.log('Ready!');
 });
 
+client.once('ready', async () => {
+    const storedUserSession = await Users.findAll();
+    storedUserSession.forEach(s => userSession.set(s.user_id, s));
+    console.log(`Logged in as ${client.user.tag}!`);
+});
 // login to Discord with your app's token
 client.login(config.token);
 
-client.on('message', message => {
+client.on('message', async message => {
 
     // Miner's Clan
     if (message.guild.id == '417584740758061056' || simServer == 417584740758061056) {
         if (message.content.startsWith(prefix_MinerClan)) {
             let args = message.content.substring(prefix_MinerClan.length).split(' ');
             let cmd = args.shift();
-            let isdev = adminlist_MinerClan.includes(message.author.id);
+            let isAdmin = message.member.hasPermission('ADMINISTRATOR');
 
             // sense cmd
             if (cmd == 'ping') {
-                if (isdev) {
+                if (isAdmin) {
                     message.channel.send('The Bot Ping: ' + client.ping);
                 }
                 else{
@@ -80,6 +130,59 @@ client.on('message', message => {
                         const mentionID = args[0].slice(3, (args[0].length - 1));
                         console.log(`args[0] is a mention, the mention id is ${mentionID}`);
                         console.log(`log time is ${new Date().getTime()}`);
+                    }
+                }
+                else {
+                    message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
+                }
+            }
+            else if (cmd == 'login') {
+                if (isAdmin) {
+                    const target = message.mentions.users.first() || 'all';
+                    if (target == 'all') {
+                        message.channel.send(`Login Session Query of All Member of ${message.guild.name} Initiated by <@!${message.author.id}>`);
+                        return message.channel.send(
+                            userSession.sort((a, b) => b.total_login - a.total_login)
+                                .filter(user => client.users.has(user.user_id))
+                                .filter(user => message.guild.members.has(user.user_id))
+                                .map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${Math.floor(user.total_login / (1000 * 60 * 60 * 24))} days ${Math.floor((user.total_login % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((user.total_login % 3600000) / (1000 * 60))} Minutes ${Math.floor((user.total_login % 60000) / (1000))} Seconds`)
+                                .join('\n'),
+                            { code: true, split: true }
+                        );
+                    }
+                    else {
+                        const DB = await Users.findByPrimary(target.id);
+                        let msg = [];
+                        message.channel.send(`Login Session Query of <@!${target.id}> Initiated by <@!${message.author.id}>`);
+                        if (target.presence.status != 'offline') {
+                            msg = [
+                                `${target.tag}:`,
+                                `Total login: ${Math.floor(Number(DB.total_login) / (1000 * 60 * 60 * 24))} days ${Math.floor((Number(DB.total_login) % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((Number(DB.total_login) % 3600000) / (1000 * 60))} Minutes ${Math.floor((Number(DB.total_login) % 60000) / (1000))} Seconds`,
+                                ' ',
+                                'Last Login Session: ',
+                                `Start: ${new Date(Number(DB.last_session_start))}`,
+                                `End: ${new Date(Number(DB.last_session_end))}`,
+                                ' ',
+                                'Player currently logged in',
+                                `Current login starts at ${new Date(Number(DB.current_session_start))}`,
+                            ];
+                        }
+                        else {
+                            msg = [
+                                `${target.tag}:`,
+                                `Total login: ${Math.floor(Number(DB.total_login) / (1000 * 60 * 60 * 24))} days ${Math.floor((Number(DB.total_login) % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((Number(DB.total_login) % 3600000) / (1000 * 60))} Minutes ${Math.floor((Number(DB.total_login) % 60000) / (1000))} Seconds`,
+                                ' ',
+                                'Last Login Session: ',
+                                `Start: ${new Date(Number(DB.last_session_start))}`,
+                                `End: ${new Date(Number(DB.last_session_end))}`,
+                                ' ',
+                                'Member is currently offline',
+                            ];
+                        }
+                        return message.channel.send(
+                            msg.join('\n'),
+                            { code: true }
+                        );
                     }
                 }
                 else {
@@ -158,7 +261,7 @@ client.on('message', message => {
         if (message.content.startsWith(prefix_GamingInc)) {
             let args = message.content.substring(prefix_GamingInc.length).split(' ');
             let cmd = args.shift();
-            let isdev = adminlist_GamingInc.includes(message.author.id);
+            let isAdmin = message.member.hasPermission('ADMINISTRATOR');
 
             if (cmd == 'ping') {
                 if (true) {
@@ -169,12 +272,80 @@ client.on('message', message => {
                     message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
                 }
             }
+            else if (cmd == 'login') {
+                if (isAdmin) {
+                    const target = message.mentions.users.first() || 'all';
+                    if (target == 'all') {
+                        message.channel.send(`Login Session Query of All Member of ${message.guild.name} Initiated by <@!${message.author.id}>`);
+                        return message.channel.send(
+                            userSession.sort((a, b) => b.total_login - a.total_login)
+                                .filter(user => client.users.has(user.user_id))
+                                .filter(user => message.guild.members.has(user.user_id))
+                                .map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${Math.floor(user.total_login / (1000 * 60 * 60 * 24))} days ${Math.floor((user.total_login % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((user.total_login % 3600000) / (1000 * 60))} Minutes ${Math.floor((user.total_login % 60000) / (1000))} Seconds`)
+                                .join('\n'),
+                            { code: true, split: true }
+                        );
+                    }
+                    else {
+                        const DB = await Users.findByPrimary(target.id);
+                        let msg = [];
+                        message.channel.send(`Login Session Query of <@!${target.id}> Initiated by <@!${message.author.id}>`);
+                        if (target.presence.status != 'offline') {
+                            msg = [
+                                `${target.tag}:`,
+                                `Total login: ${Math.floor(Number(DB.total_login) / (1000 * 60 * 60 * 24))} days ${Math.floor((Number(DB.total_login) % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((Number(DB.total_login) % 3600000) / (1000 * 60))} Minutes ${Math.floor((Number(DB.total_login) % 60000) / (1000))} Seconds`,
+                                ' ',
+                                'Last Login Session: ',
+                                `Start: ${new Date(Number(DB.last_session_start))}`,
+                                `End: ${new Date(Number(DB.last_session_end))}`,
+                                ' ',
+                                'Player currently logged in',
+                                `Current login starts at ${new Date(Number(DB.current_session_start))}`,
+                            ];
+                        }
+                        else {
+                            msg = [
+                                `${target.tag}:`,
+                                `Total login: ${Math.floor(Number(DB.total_login) / (1000 * 60 * 60 * 24))} days ${Math.floor((Number(DB.total_login) % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((Number(DB.total_login) % 3600000) / (1000 * 60))} Minutes ${Math.floor((Number(DB.total_login) % 60000) / (1000))} Seconds`,
+                                ' ',
+                                'Last Login Session: ',
+                                `Start: ${new Date(Number(DB.last_session_start))}`,
+                                `End: ${new Date(Number(DB.last_session_end))}`,
+                                ' ',
+                                'Member is currently offline',
+                            ];
+                        }
+                        return message.channel.send(
+                            msg.join('\n'),
+                            { code: true }
+                        );
+                    }
+                }
+                else {
+                    message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
+                }
+            }
+            else if (cmd == 'help') {
+                const help_msg = [
+                    'MKLBot Command Help:',
+                    ' ',
+                    `${prefix_GamingInc}ping`,
+                    'Obtain the bot status, ping and uptime',
+                    ' ',
+                    `${prefix_GamingInc}login -[PlayerMention]`,
+                    '-[PlayerMention]   OPTIONAL   eg. @JackTheBeast',
+                    'If given [PlayerMention], Bot will display detailed login data of the player',
+                    'If not given [PlayerMention], Bot will display all total login time of all players',
+                ];
+                message.channel.send(help_msg.join('\n'), { code: true });
+            }
         }
     }
 });
 
-/* testing presenceUpdate
+// Update of presence of Users in guild of bot
 client.on('presenceUpdate', (oldMember, newMember)=> {
+    /* test of update using console log
     console.log('old: ');
     console.log(oldMember.user.username);
     console.log(oldMember.guild.name);
@@ -182,5 +353,11 @@ client.on('presenceUpdate', (oldMember, newMember)=> {
     console.log('new: ');
     console.log(newMember.user.username);
     console.log(newMember.guild.name);
-    console.log(newMember.presence);
-});*/
+    console.log(newMember.presence);*/
+    if (oldMember.presence.status == 'offline' && newMember.presence.status != 'offline') {
+        userSession.login(newMember.user.id);
+    }
+    else if (oldMember.presence.status != 'offline' && newMember.presence.status == 'offline') {
+        userSession.logout(newMember.user.id);
+    }
+});
