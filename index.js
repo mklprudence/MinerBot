@@ -136,6 +136,59 @@ client.on('message', async message => {
                     message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
                 }
             }
+            else if (cmd == 'login') {
+                if (isAdmin) {
+                    const target = message.mentions.users.first() || 'all';
+                    if (target == 'all') {
+                        message.channel.send(`Login Session Query of All Member of ${message.guild.name} Initiated by <@!${message.author.id}>`);
+                        return message.channel.send(
+                            userSession.sort((a, b) => b.total_login - a.total_login)
+                                .filter(user => client.users.has(user.user_id))
+                                .filter(user => message.guild.members.has(user.user_id))
+                                .map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${Math.floor(user.total_login / (1000 * 60 * 60 * 24))} days ${Math.floor((user.total_login % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((user.total_login % 3600000) / (1000 * 60))} Minutes ${Math.floor((user.total_login % 60000) / (1000))} Seconds`)
+                                .join('\n'),
+                            { code: true, split: true }
+                        );
+                    }
+                    else {
+                        var DB = await Users.findByPrimary(target.id);
+                        let msg = [];
+                        message.channel.send(`Login Session Query of <@!${target.id}> Initiated by <@!${message.author.id}>`);
+                        if (target.presence.status != 'offline') {
+                            msg = [
+                                `${target.tag}:`,
+                                `Total login: ${Math.floor(Number(DB.total_login) / (1000 * 60 * 60 * 24))} days ${Math.floor((Number(DB.total_login) % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((Number(DB.total_login) % 3600000) / (1000 * 60))} Minutes ${Math.floor((Number(DB.total_login) % 60000) / (1000))} Seconds`,
+                                ' ',
+                                'Last Login Session: ',
+                                `Start: ${new Date(Number(DB.last_session_start))}`,
+                                `End: ${new Date(Number(DB.last_session_end))}`,
+                                ' ',
+                                'Player currently logged in',
+                                `Current login starts at ${new Date(Number(DB.current_session_start))}`,
+                            ];
+                        }
+                        else {
+                            msg = [
+                                `${target.tag}:`,
+                                `Total login: ${Math.floor(Number(DB.total_login) / (1000 * 60 * 60 * 24))} days ${Math.floor((Number(DB.total_login) % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((Number(DB.total_login) % 3600000) / (1000 * 60))} Minutes ${Math.floor((Number(DB.total_login) % 60000) / (1000))} Seconds`,
+                                ' ',
+                                'Last Login Session: ',
+                                `Start: ${new Date(Number(DB.last_session_start))}`,
+                                `End: ${new Date(Number(DB.last_session_end))}`,
+                                ' ',
+                                'Member is currently offline',
+                            ];
+                        }
+                        return message.channel.send(
+                            msg.join('\n'),
+                            { code: true }
+                        );
+                    }
+                }
+                else {
+                    message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
+                }
+            }
         }
     }
 
