@@ -226,6 +226,7 @@ client.on('message', async message => {
                         return message.channel.send(
                             userSession.sort((a, b) => b.total_login - a.total_login)
                                 .filter(user => client.users.has(user.user_id))
+                                .filter(user => message.guild.members.has(user.user_id))
                                 .map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${Math.floor(user.total_login / (1000 * 60 * 60 * 24))} days ${Math.floor((user.total_login % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((user.total_login % 3600000) / (1000 * 60))} Minutes ${Math.floor((user.total_login % 60000) / (1000))} Seconds`)
                                 .join('\n'),
                             { code: true, split: true }
