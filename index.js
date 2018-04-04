@@ -81,7 +81,7 @@ client.once('ready', async () => {
 // login to Discord with your app's token
 client.login(config.token);
 
-client.on('message', message => {
+client.on('message', async message => {
 
     // Miner's Clan
     if (message.guild.id == '417584740758061056' || simServer == 417584740758061056) {
