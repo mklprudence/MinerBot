@@ -326,7 +326,7 @@ client.on('message', async message => {
                 }
             }
             else if (cmd == 'help'){
-                const 
+                
             }
         }
     }
