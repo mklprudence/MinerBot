@@ -326,18 +326,43 @@ client.on('message', async message => {
                 }
             }
             else if (cmd == 'help') {
-                const help_msg = [
-                    'MKLBot Command Help:',
-                    ' ',
-                    `${prefix_GamingInc}ping`,
-                    'Obtain the bot status, ping and uptime',
-                    ' ',
-                    `\`${prefix_GamingInc}login -[PlayerMention]\``,
-                    '-[PlayerMention]   OPTIONAL   eg. @JackTheBeast',
-                    'If given [PlayerMention], Bot will display detailed login data of the player',
-                    'If not given [PlayerMention], Bot will display all total login time of all players',
+                const help_ping = [
+                    'Obtain the bot status',
+                    'Displays Bot ping and uptime',
                 ];
-                message.channel.send(help_msg.join('\n'), { embed: true });
+                const help_login = [
+                    '[-PlayerMention]   OPTIONAL   eg. @JackTheBeast',
+                    ' ',
+                    'If given [-PlayerMention], Bot will display detailed login data of the player',
+                    'If not given [-PlayerMention], Bot will display all total login time of all players',
+                ];
+                const help_help = [
+                    'Displays this help menu',
+                ];
+                message.channel.send({ embed: {
+                    color: 16514816,
+                    title: 'MKLBot Command Help',
+                    description: `The prefix of the bot is ${prefix_GamingInc}`,
+                    fields: [
+                        {
+                            name: `${prefix_GamingInc}ping`,
+                            value: help_ping.join('\n'),
+                        },
+                        {
+                            name: `${prefix_GamingInc}login [-PlayerMention] (REQUIRES ADMIN)`,
+                            value: help_login.join('\n'),
+                        },
+                        {
+                            name: `${prefix_GamingInc}help`,
+                            value: help_help.join('\n'),
+                        },
+                    ],
+                    timestamp: new Date(),
+                    footer: {
+                        text: '©mklprudence',
+                        icon_url: client.user.avatarURL,
+                    },
+                } });
             }
         }
     }
