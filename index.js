@@ -332,12 +332,12 @@ client.on('message', async message => {
                     `${prefix_GamingInc}ping`,
                     'Obtain the bot status, ping and uptime',
                     ' ',
-                    `${prefix_GamingInc}login -[PlayerMention]`,
+                    `\`${prefix_GamingInc}login -[PlayerMention]\``,
                     '-[PlayerMention]   OPTIONAL   eg. @JackTheBeast',
                     'If given [PlayerMention], Bot will display detailed login data of the player',
                     'If not given [PlayerMention], Bot will display all total login time of all players',
                 ];
-                message.channel.send(help_msg.join('\n'), { code: true });
+                message.channel.send(help_msg.join('\n'), { embed: true });
             }
         }
     }
