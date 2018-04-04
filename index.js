@@ -237,16 +237,16 @@ client.on('message', message => {
                         if (DB.login_status) {
                             msg = [
                                 `${target.tag}:`,
-                                `Total login: ${Math.floor(DB.total_login / (1000 * 60 * 60 * 24))} days ${Math.floor((DB.total_login % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((DB.total_login % 3600000) / (1000 * 60))} Minutes ${Math.floor((DB.total_login % 60000) / (1000))} Seconds`,
-                                `Last login is from ${new Date(DB.last_session_start)} to ${new Date(DB.last_session_end)}`,
-                                `Current login starts at ${new Date(DB.current_session_start)}`,
+                                `Total login: ${Math.floor(Number(DB.total_login) / (1000 * 60 * 60 * 24))} days ${Math.floor((Number(DB.total_login) % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((Number(DB.total_login) % 3600000) / (1000 * 60))} Minutes ${Math.floor((Number(DB.total_login) % 60000) / (1000))} Seconds`,
+                                `Last login is from ${new Date(Number(DB.last_session_start))} to ${new Date(Number(DB.last_session_end))}`,
+                                `Current login starts at ${new Date(Number(DB.current_session_start))}`,
                             ];
                         }
                         else {
                             msg = [
                                 `${target.tag}:`,
-                                `Total login: ${Math.floor(DB.total_login / (1000 * 60 * 60 * 24))} days ${Math.floor((DB.total_login % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((DB.total_login % 3600000) / (1000 * 60))} Minutes ${Math.floor((DB.total_login % 60000) / (1000))} Seconds`,
-                                `Last login is from ${new Date(DB.last_session_start)} to ${new Date(DB.last_session_end)}`,
+                                `Total login: ${Math.floor(Number(DB.total_login) / (1000 * 60 * 60 * 24))} days ${Math.floor((Number(DB.total_login) % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((Number(DB.total_login) % 3600000) / (1000 * 60))} Minutes ${Math.floor((Number(DB.total_login) % 60000) / (1000))} Seconds`,
+                                `Last login is from ${new Date(Number(DB.last_session_start))} to ${new Date(Number(DB.last_session_end))}`,
                             ];
                         }
                         return message.channel.send(
