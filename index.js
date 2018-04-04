@@ -232,7 +232,7 @@ client.on('message', message => {
                         );*/
                     }
                     else {
-                        var DB = Users.findByPrimary(target.id);
+                        var DB = await Users.findByPrimary(target.id);
                         let msg = [];
                         message.channel.send(target.id);
                         if (DB.login_status) {
