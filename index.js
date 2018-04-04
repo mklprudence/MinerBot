@@ -234,7 +234,7 @@ client.on('message', message => {
                     else {
                         var DB = Users.findByPrimary(target.id);
                         let msg = [];
-                        message.channel.send(DB.total_login);
+                        message.channel.send(target.id);
                         if (DB.login_status) {
                             msg = [
                                 `${target.tag}:`,
