@@ -88,11 +88,11 @@ client.on('message', async message => {
         if (message.content.startsWith(prefix_MinerClan)) {
             let args = message.content.substring(prefix_MinerClan.length).split(' ');
             let cmd = args.shift();
-            let isdev = adminlist_MinerClan.includes(message.author.id);
+            let isAdmin = message.member.hasPermission('ADMINISTRATOR');
 
             // sense cmd
             if (cmd == 'ping') {
-                if (isdev) {
+                if (isAdmin) {
                     message.channel.send('The Bot Ping: ' + client.ping);
                 }
                 else{
