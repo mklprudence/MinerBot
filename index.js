@@ -235,7 +235,7 @@ client.on('message', async message => {
                         var DB = await Users.findByPrimary(target.id);
                         let msg = [];
                         message.channel.send(target.id);
-                        if (DB.login_status) {
+                        if (target.presence.status != 'offline') {
                             msg = [
                                 `${target.tag}:`,
                                 `Total login: ${Math.floor(Number(DB.total_login) / (1000 * 60 * 60 * 24))} days ${Math.floor((Number(DB.total_login) % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((Number(DB.total_login) % 3600000) / (1000 * 60))} Minutes ${Math.floor((Number(DB.total_login) % 60000) / (1000))} Seconds`,
