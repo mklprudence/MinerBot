@@ -325,8 +325,19 @@ client.on('message', async message => {
                     message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
                 }
             }
-            else if (cmd == 'help'){
-                
+            else if (cmd == 'help') {
+                const help_msg = [
+                    'MKLBot Command Help:',
+                    ' ',
+                    `${prefix_GamingInc}ping`,
+                    'Obtain the bot status, ping and uptime',
+                    ' ',
+                    `${prefix_GamingInc}login -[PlayerMention]`,
+                    '-[PlayerMention]   OPTIONAL   eg. @JackTheBeast',
+                    'If given [PlayerMention], Bot will display detailed login data of the player',
+                    'If not given [PlayerMention], Bot will display all total login time of all players',
+                ];
+                message.channel.send(help_msg.join('\n'), { code: true });
             }
         }
     }
