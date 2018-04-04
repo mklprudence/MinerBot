@@ -223,6 +223,7 @@ client.on('message', async message => {
                 if (isAdmin) {
                     const target = message.mentions.users.first() || 'all';
                     if (target == 'all') {
+                        message.channel.send(`Login Session Query of All Member of ${message.guild.name} Initiated by <@!${message.author.id}>`);
                         return message.channel.send(
                             userSession.sort((a, b) => b.total_login - a.total_login)
                                 .filter(user => client.users.has(user.user_id))
@@ -235,7 +236,7 @@ client.on('message', async message => {
                     else {
                         var DB = await Users.findByPrimary(target.id);
                         let msg = [];
-                        message.channel.send(`Login Session Query Initiated by <@!${message.author.id}>`);
+                        message.channel.send(`Login Session Query of <@!${target.id}> Initiated by <@!${message.author.id}>`);
                         if (target.presence.status != 'offline') {
                             msg = [
                                 `${target.tag}:`,
@@ -266,6 +267,9 @@ client.on('message', async message => {
                             { code: true }
                         );
                     }
+                }
+                else {
+                    message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
                 }
             }
         }
