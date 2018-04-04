@@ -208,7 +208,7 @@ client.on('message', async message => {
         if (message.content.startsWith(prefix_GamingInc)) {
             let args = message.content.substring(prefix_GamingInc.length).split(' ');
             let cmd = args.shift();
-            let isAdmin = message.member.hasPermission("ADMINISTRATOR");
+            let isAdmin = message.member.hasPermission('ADMINISTRATOR');
 
             if (cmd == 'ping') {
                 if (true) {
