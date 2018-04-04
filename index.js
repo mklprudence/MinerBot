@@ -331,7 +331,7 @@ client.on('message', async message => {
                     'Displays Bot ping and uptime',
                     ' ',
                     ' ',
-                    ' ',
+                    '.',
                 ];
                 const help_login = [
                     '[-PlayerMention]   OPTIONAL   eg. @JackTheBeast',
@@ -340,19 +340,19 @@ client.on('message', async message => {
                     'If not given [-PlayerMention], Bot will display all total login time of all players',
                     ' ',
                     ' ',
-                    ' ',
+                    '.',
                 ];
                 const help_help = [
                     'Displays this help menu',
                     ' ',
                     ' ',
-                    ' ',
+                    '.',
                 ];
                 const description = [
                     `The prefix of the bot is ${prefix_GamingInc}`,
                     ' ',
                     ' ',
-                    ' ',
+                    '.',
                 ];
                 message.channel.send({ embed: {
                     color: 16514816,
