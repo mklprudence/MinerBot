@@ -32,7 +32,7 @@ Reflect.defineProperty(userSession, 'login', {
         if (user) {
             const target = await Users.findByPrimary(id);
             target.login(client.uptime);
-            console.log(`Member ${discUser.user} (${id}) logged in`);
+            console.log(`Member ${discUser.username} (${id}) logged in`);
             user.save();
             userSession.set(id, target);
             return user.save();
