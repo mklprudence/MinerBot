@@ -379,7 +379,7 @@ client.on('message', async message => {
                         message.channel.send(`Login Session Query of <@!${target.id}> Initiated by <@!${message.author.id}>`);
                         message.channel.send('**The total online time excludes the current session**');
                         if (!DB) {
-                            return message.channel.send('There is no login data');
+                            return message.channel.send('There is no login data', { code: true });
                         }
                         if (target.presence.status != 'offline') {
                             msg = [
