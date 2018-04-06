@@ -28,7 +28,7 @@ const userSession = new Discord.Collection();
 Reflect.defineProperty(userSession, 'login', {
     value: async function login(id) {
         const user = userSession.get(id);
-        const discUser = client.users.get(id);
+        const discUser = client.users.get(id) || { 'username': 'not in client user list' };
         if (user) {
             const target = await Users.findByPrimary(id);
             target.login(client.uptime);
@@ -50,7 +50,7 @@ Reflect.defineProperty(userSession, 'login', {
 Reflect.defineProperty(userSession, 'logout', {
     value: async function logout(id) {
         const user = userSession.get(id);
-        const discUser = client.users.get(id);
+        const discUser = client.users.get(id) || { 'username': 'not in client user list' };
         if (user) {
             const target = await Users.findByPrimary(id);
             target.logout(client.uptime);
