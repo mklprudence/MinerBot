@@ -280,14 +280,15 @@ client.on('message', async message => {
             }
             else if (cmd == 'login') {
                 if (isAdmin) {
+                    let target;
                     if (args[0] == undefined || args[0] == null) {
-                        const target = 'all';
+                        target = 'all';
                     }
                     else if (args[0].toLowerCase == 'staff') {
-                        const target = 'staff';
+                        target = 'staff';
                     }
                     else if (!message.mentions.users.first() == undefined && !message.mentions.users.first() == null) {
-                        const target = message.mentions.users.first();
+                        target = message.mentions.users.first();
                     }
                     else{
                         return message.channel.send('<@!266401880362450944> idk why there is something wrong with the login command');
@@ -304,7 +305,7 @@ client.on('message', async message => {
                             { code: true, split: true }
                         );
                     }
-                    else if (target == 'staff'){
+                    else if (target == 'staff') {
                         message.channel.send(`Login Session Query of All Staff Member of ${message.guild.name} Initiated by <@!${message.author.id}>`);
                         message.channel.send(`Query Time: ${new Date()}`);
                         return message.channel.send(
