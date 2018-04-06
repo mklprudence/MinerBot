@@ -1,5 +1,3 @@
-import { isUndefined, isNullOrUndefined } from 'util';
-
 // setup global variables
 const config = require('./config.json');
 var simServer = 275235526330810369;
@@ -282,13 +280,13 @@ client.on('message', async message => {
             }
             else if (cmd == 'login') {
                 if (isAdmin) {
-                    if (isNullOrUndefined(args[0])){
+                    if (args[0] == undefined || args[0] == null) {
                         const target = 'all';
                     }
-                    else if (args[0].toLowerCase == 'staff'){
+                    else if (args[0].toLowerCase == 'staff') {
                         const target = 'staff';
                     }
-                    else if (!isNullOrUndefined(message.mentions.users)){
+                    else if (!message.mentions.users.first() == undefined && !message.mentions.users.first() == null) {
                         const target = message.mentions.users.first();
                     }
                     else{
