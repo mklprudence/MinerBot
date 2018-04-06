@@ -28,10 +28,11 @@ const userSession = new Discord.Collection();
 Reflect.defineProperty(userSession, 'login', {
     value: async function login(id) {
         const user = userSession.get(id);
+        const discUser = client.users.get(id);
         if (user) {
             const target = await Users.findByPrimary(id);
             target.login(client.uptime);
-            console.log(`Member with ${id} logged in`);
+            console.log(`Member ${discUser.user} (${id}) logged in`);
             user.save();
             userSession.set(id, target);
             return user.save();
@@ -49,10 +50,11 @@ Reflect.defineProperty(userSession, 'login', {
 Reflect.defineProperty(userSession, 'logout', {
     value: async function logout(id) {
         const user = userSession.get(id);
+        const discUser = client.users.get(id);
         if (user) {
             const target = await Users.findByPrimary(id);
             target.logout(client.uptime);
-            console.log(`Member with ${id} logged out`);
+            console.log(`Member ${discUser.username} (${id}) logged out`);
             user.save();
             userSession.set(id, target);
             return user.save();
