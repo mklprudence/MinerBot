@@ -375,6 +375,9 @@ client.on('message', async message => {
                     }
                     else {
                         const DB = await Users.findByPrimary(target.id);
+                        if (!DB) {
+                            message.channel.send('There is no login data');
+                        }
                         let msg = [];
                         message.channel.send(`Login Session Query of <@!${target.id}> Initiated by <@!${message.author.id}>`);
                         message.channel.send('**The total online time excludes the current session**');
