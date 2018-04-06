@@ -94,7 +94,7 @@ client.on('message', async message => {
         if (message.content.startsWith(prefix_MinerClan)) {
             let args = message.content.substring(prefix_MinerClan.length).split(' ');
             let cmd = args.shift();
-            let isAdmin = message.member.hasPermission('ADMINISTRATOR');
+            let isAdmin = message.member.has('ADMINISTRATOR');
 
             // sense cmd
             if (cmd == 'ping') {
@@ -321,7 +321,7 @@ client.on('message', async message => {
         if (message.content.startsWith(prefix_GamingInc)) {
             let args = message.content.substring(prefix_GamingInc.length).split(' ');
             let cmd = args.shift();
-            let isAdmin = message.member.hasPermission('ADMINISTRATOR');
+            let isAdmin = message.member.has('ADMINISTRATOR');
 
             if (cmd == 'ping') {
                 if (true) {
@@ -366,7 +366,7 @@ client.on('message', async message => {
                             userSession.sort((a, b) => b.total_login - a.total_login)
                                 .filter(user => client.users.has(user.user_id))
                                 .filter(user => message.guild.members.has(user.user_id))
-                                .filter(user => message.guild.members.get(user.user_id).permissions.hasPermission("MENTION_EVERYONE"))
+                                .filter(user => message.guild.members.get(user.user_id).permissions.has('MENTION_EVERYONE'))
                                 .map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${Math.floor(user.total_login / (1000 * 60 * 60 * 24))} days ${Math.floor((user.total_login % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((user.total_login % 3600000) / (1000 * 60))} Minutes ${Math.floor((user.total_login % 60000) / (1000))} Seconds`)
                                 .join('\n'),
                             { code: true, split: true }
