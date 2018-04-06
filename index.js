@@ -195,6 +195,60 @@ client.on('message', async message => {
                     message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
                 }
             }
+            else if (cmd == 'help') {
+                const help_ping = [
+                    'Obtain the bot status',
+                    'Displays Bot ping and uptime',
+                    ' ',
+                    ' ',
+                    '.',
+                ];
+                const help_login = [
+                    '[-PlayerMention]   OPTIONAL   eg. @MineBerserker',
+                    ' ',
+                    'If given [-PlayerMention], Bot will display detailed login data of the player',
+                    'If not given [-PlayerMention], Bot will display all total login time of all players',
+                    ' ',
+                    ' ',
+                    '.',
+                ];
+                const help_help = [
+                    'Displays this help menu',
+                    ' ',
+                    ' ',
+                    '.',
+                ];
+                const description = [
+                    `The prefix of the bot is ${prefix_MinerClan}`,
+                    ' ',
+                    ' ',
+                    '.',
+                ];
+                message.channel.send({ embed: {
+                    color: 16514816,
+                    title: 'MKLBot Command Help',
+                    description: description.join('\n'),
+                    fields: [
+                        {
+                            name: `${prefix_MinerClan}ping`,
+                            value: help_ping.join('\n'),
+                        },
+                        {
+                            name: `${prefix_MinerClan}login [-PlayerMention] (REQUIRES ADMIN)`,
+                            value: help_login.join('\n'),
+                        },
+                        {
+                            name: `${prefix_MinerClan}help`,
+                            value: help_help.join('\n'),
+                        },
+                    ],
+                    timestamp: new Date(),
+                    footer: {
+                        text: '©mklprudence',
+                        icon_url: client.user.avatarURL,
+                    },
+                } });
+            }
         }
     }
 
