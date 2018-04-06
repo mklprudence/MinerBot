@@ -1,3 +1,5 @@
+import { isUndefined, isNullOrUndefined } from 'util';
+
 // setup global variables
 const config = require('./config.json');
 var simServer = 275235526330810369;
@@ -280,7 +282,18 @@ client.on('message', async message => {
             }
             else if (cmd == 'login') {
                 if (isAdmin) {
-                    const target = message.mentions.users.first() || 'all';
+                    if (isNullOrUndefined(args[0])){
+                        const target = 'all';
+                    }
+                    else if (args[0].toLowerCase == 'staff'){
+                        const target = 'staff';
+                    }
+                    else if (!isNullOrUndefined(message.mentions.users)){
+                        const target = message.mentions.users.first();
+                    }
+                    else{
+                        return message.channel.send('<@!266401880362450944> idk why there is something wrong with the login command');
+                    }
                     if (target == 'all') {
                         message.channel.send(`Login Session Query of All Member of ${message.guild.name} Initiated by <@!${message.author.id}>`);
                         message.channel.send('**The total online time excludes the current session**');
@@ -288,6 +301,19 @@ client.on('message', async message => {
                             userSession.sort((a, b) => b.total_login - a.total_login)
                                 .filter(user => client.users.has(user.user_id))
                                 .filter(user => message.guild.members.has(user.user_id))
+                                .map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${Math.floor(user.total_login / (1000 * 60 * 60 * 24))} days ${Math.floor((user.total_login % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((user.total_login % 3600000) / (1000 * 60))} Minutes ${Math.floor((user.total_login % 60000) / (1000))} Seconds`)
+                                .join('\n'),
+                            { code: true, split: true }
+                        );
+                    }
+                    else if (target == 'staff'){
+                        message.channel.send(`Login Session Query of All Staff Member of ${message.guild.name} Initiated by <@!${message.author.id}>`);
+                        message.channel.send(`Query Time: ${new Date()}`);
+                        return message.channel.send(
+                            userSession.sort((a, b) => b.total_login - a.total_login)
+                                .filter(user => client.users.has(user.user_id))
+                                .filter(user => message.guild.members.has(user.user_id))
+                                .filter(user => message.guild.members.get(id).permissions.hasPermission("MENTION_EVERYONE"))
                                 .map((user, position) => `(${position + 1}) ${(client.users.get(user.user_id).tag)}: ${Math.floor(user.total_login / (1000 * 60 * 60 * 24))} days ${Math.floor((user.total_login % 86400000) / (1000 * 60 * 60))} hours ${Math.floor((user.total_login % 3600000) / (1000 * 60))} Minutes ${Math.floor((user.total_login % 60000) / (1000))} Seconds`)
                                 .join('\n'),
                             { code: true, split: true }
