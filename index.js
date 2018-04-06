@@ -287,7 +287,7 @@ client.on('message', async message => {
                     else if (args[0].toLowerCase == 'staff') {
                         target = 'staff';
                     }
-                    else if (!message.mentions.users.first() == undefined && !message.mentions.users.first() == null) {
+                    else if (message.mentions.users.first() != undefined && message.mentions.users.first() != null) {
                         target = message.mentions.users.first();
                     }
                     else{
