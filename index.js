@@ -32,6 +32,8 @@ Reflect.defineProperty(userSession, 'login', {
             const target = await Users.findByPrimary(id);
             target.login(client.uptime);
             console.log(`Member with ${id} logged in`);
+            user.save();
+            userSession.set(id, target);
             return user.save();
         }
         const newUser = await Users.create({
@@ -51,6 +53,8 @@ Reflect.defineProperty(userSession, 'logout', {
             const target = await Users.findByPrimary(id);
             target.logout(client.uptime);
             console.log(`Member with ${id} logged out`);
+            user.save();
+            userSession.set(id, target);
             return user.save();
         }
         const newUser = await Users.create({
