@@ -312,7 +312,7 @@ client.on('message', async message => {
                 }
                 else if (cmd == 'removereaction') {
                     message.channel.fetchMessage(args[0])
-                            .then(msg => msg.reactions.delete(msg.reactions.filter(val => val.emoji.name == args[2]).firstKey()))
+                            .then(msg => msg.reactions.delete(msg.reactions.filter(val => val.emoji.name == args[1]).firstKey()))
                             .catch(console.error);
                 }
             }
