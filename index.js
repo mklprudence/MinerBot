@@ -295,6 +295,10 @@ client.on('message', async message => {
                         const emoji = client.emojis.find('identifier', args[1]);
                         message.channel.send(`${emoji}`);
                     }
+                    else if (args[0] == 'emojilist') {
+                        const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
+                        message.channel.send(emojiList);
+                    }
                 }
             }
             else{
