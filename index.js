@@ -129,19 +129,6 @@ client.on('message', async message => {
                     setTimeout(function() {message.channel.send('/pick Charmander');}, 1000);
                 }
             }
-            else if (cmd == 'log') {
-                if (isdev) {
-                    console.log(args.join(' '));
-                    if (args[0].startsWith('<@!') && args[0].endsWith('>')) {
-                        const mentionID = args[0].slice(3, (args[0].length - 1));
-                        console.log(`args[0] is a mention, the mention id is ${mentionID}`);
-                        console.log(`log time is ${new Date().getTime()}`);
-                    }
-                }
-                else {
-                    message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
-                }
-            }
             else if (cmd == 'login') {
                 if (isAdmin) {
                     const target = message.mentions.users.first() || 'all';
@@ -297,6 +284,16 @@ client.on('message', async message => {
                         message.channel.send('Use a valid ServerName to start simulation!!!');
                         message.channel.send(' - MinerClan  |  Skybounds Clan created by MineBerserker');
                         message.channel.send(' - GamingInc  |  Gaming group created by JackIsBeast');
+                    }
+                }
+                else if (cmd == 'dev') {
+                    if (args[0] == 'input') {
+                        args.shift();
+                        console.log(`The input is:${args.join(' ')}`);
+                    }
+                    else if (args[0] == 'emoji') {
+                        const emoji = client.emojis.find('name', args[1]);
+                        message.channel.send(emoji);
                     }
                 }
             }
@@ -474,6 +471,7 @@ client.on('message', async message => {
             }
         }
     }
+
 });
 
 // Update of presence of Users in guild of bot
