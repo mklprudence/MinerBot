@@ -296,7 +296,7 @@ client.on('message', async message => {
                         message.channel.send(`${emoji}`);
                     }
                     else if (args[0] == 'emojilist') {
-                        const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
+                        const emojiList = client.emojis.map(e=>e.toString()).join(" ");
                         message.channel.send(emojiList);
                     }
                 }
