@@ -310,6 +310,11 @@ client.on('message', async message => {
                             .catch(console.error);
                     }
                 }
+                else if (cmd == 'removereaction') {
+                    message.channel.fetchMessage(args[1])
+                            .then(msg => msg.reactions.find(val => val.emoji.name == args[2]).delete(msg.reactions.filter(val => val.emoji.name == args[2]).firstKey()))
+                            .catch(console.error);
+                }
             }
             else{
                 // sense cmd in case with simulation
