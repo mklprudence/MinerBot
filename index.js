@@ -306,7 +306,7 @@ client.on('message', async message => {
                     }
                     else if (args[0] == 'reactioncount') {
                         message.channel.fetchMessage(args[1])
-                            .then(msg => msg.reactions.find(val => val.emoji.name == args[2]).then(reaction => message.channel.send(reaction.count)))
+                            .then(msg => message.channel.send(msg.reactions.find(val => val.emoji.name == args[2]).count))
                             .catch(console.error);
                     }
                 }
