@@ -317,9 +317,12 @@ client.on('message', async message => {
                     }
                 }
                 else if (cmd == 'removereaction') {
-                    message.channel.fetchMessage(args[0])
+                    /* message.channel.fetchMessage(args[0])
                             .then(msg => msg.reactions.delete(msg.reactions.filter(val => val.emoji.name == args[1]).firstKey()))
-                            .catch(console.error);
+                            .catch(console.error);*/
+                    message.channel.fetchMessage(args[0])
+                        .then(msg => msg.reactions.delete(args[1]))
+                        .catch(console.error);
                 }
             }
             else{
