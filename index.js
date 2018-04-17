@@ -300,8 +300,9 @@ client.on('message', async message => {
                         message.channel.send(emojiList);
                     }
                     else if (args[0] == 'reactionlist') {
-                        const reactionlist = message.channel.fetchMessage(args[1]).reactions.map(r => r.emoji).join('\n');
-                        message.channel.send(reactionlist);
+                        message.channel.fetchMessage(args[1])
+                            .then(msg => msg.reactions.map(r => r.emoji).join('\n'))
+                            .catch(console.error);
                     }
                 }
             }
