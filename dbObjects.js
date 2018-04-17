@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('sql12229851', 'sql12229851', 'XnBWZXbMZ7', {
-    host: 'sql12.freemysqlhosting.net',
+const sequelize = new Sequelize('epiz_21949064_MKLBot', 'epiz_21949064', 'mklprudence', {
+    host: 'sql210.epizy.com',
     dialect: 'mysql',
     logging: false,
 });
