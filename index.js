@@ -293,7 +293,7 @@ client.on('message', async message => {
                     }
                     else if (args[0] == 'emoji') {
                         const emoji = client.emojis.find('name', args[1]);
-                        message.channel.send(emoji);
+                        message.channel.send(`${emoji}`);
                     }
                 }
             }
