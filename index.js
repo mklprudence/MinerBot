@@ -301,7 +301,7 @@ client.on('message', async message => {
                     }
                     else if (args[0] == 'reactionlist') {
                         message.channel.fetchMessage(args[1])
-                            .then(msg => message.channel.send(msg.reactions.map(r => r.emoji.name).join('\n')))
+                            .then(msg => message.channel.send(msg.reactions.map(r => r.emoji.id).join('\n')))
                             .catch(console.error);
                     }
                 }
