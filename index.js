@@ -299,6 +299,10 @@ client.on('message', async message => {
                         const emojiList = client.emojis.map(e=>e.toString()).join(" ");
                         message.channel.send(emojiList);
                     }
+                    else if (args[0] == 'reactionlist') {
+                        const reactionlist = message.channel.fetchMessage(args[1]).reactions.map(r => r.emoji).join('\n');
+                        message.channel.send(reactionlist);
+                    }
                 }
             }
             else{
