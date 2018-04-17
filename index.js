@@ -309,6 +309,12 @@ client.on('message', async message => {
                             .then(msg => message.channel.send(msg.reactions.find(val => val.emoji.name == args[2]).count))
                             .catch(console.error);
                     }
+                    else if (args[0] == 'reactionkey') {
+                        args.shift();
+                        message.channel.fetchMessage(args[0])
+                            .then(msg => message.channel.send(msg.reactions.filter(val => val.emoji.name == args[1]).firstKey()))
+                            .catch(console.error);
+                    }
                 }
                 else if (cmd == 'removereaction') {
                     message.channel.fetchMessage(args[0])
