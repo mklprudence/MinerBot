@@ -292,7 +292,7 @@ client.on('message', async message => {
                         console.log(`The input is:${args.join(' ')}`);
                     }
                     else if (args[0] == 'emoji') {
-                        const emoji = client.emojis.find('name', args[1]);
+                        const emoji = client.emojis.find('identifier', args[1]);
                         message.channel.send(`${emoji}`);
                     }
                 }
