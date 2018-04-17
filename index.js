@@ -304,6 +304,11 @@ client.on('message', async message => {
                             .then(msg => message.channel.send(msg.reactions.map(r => r.emoji.identifier).join('\n')))
                             .catch(console.error);
                     }
+                    else if (args[0] == 'reactioncount') {
+                        message.channel.fetchMessage(args[1])
+                            .then(msg => msg.reactions.find(val => val.emoji.name == args[2]).then(reaction => message.channel.send(reaction.count)))
+                            .catch(console.error);
+                    }
                 }
             }
             else{
