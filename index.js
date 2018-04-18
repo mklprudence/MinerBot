@@ -320,7 +320,8 @@ client.on('message', async message => {
                     /* message.channel.fetchMessage(args[0])
                         .then(msg => msg.reactions.get(args[1]).users.forEach((user, key, map) => message.channel.send(user.username)))
                         .catch(console.error);*/
-                        message.channel.fetchMessage(args[0])
+                    message.channel.send('Im working');
+                    message.channel.fetchMessage(args[0])
                         .then(msg => msg.reactions.get(args[1]).users.map(user => user.username).join('\n'))
                         .catch(console.error);
                 }
