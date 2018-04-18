@@ -321,7 +321,7 @@ client.on('message', async message => {
                             .then(msg => msg.reactions.delete(msg.reactions.filter(val => val.emoji.name == args[1]).firstKey()))
                             .catch(console.error);*/
                     message.channel.fetchMessage(args[0])
-                        .then(msg => msg.reactions.get(args[1]).users.forEach(user => msg.reactions.get(args[1]).remove(user)))
+                        .then(msg => msg.reactions.get(args[1]).users.forEach(user => message.channel.send(user.username)))
                         .catch(console.error);
                 }
             }
