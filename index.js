@@ -320,11 +320,10 @@ client.on('message', async message => {
                     /* message.channel.fetchMessage(args[0])
                         .then(msg => msg.reactions.get(args[1]).users.forEach((user, key, map) => message.channel.send(user.username)))
                         .catch(console.error);*/
-                    console.log(client.users);
                     message.channel.fetchMessage(args[0])
                         .then(function(msg) {
                             msg.reactions.get(args[1]).fetchUsers().then(
-                                users => console.log(users)
+                                users => users.forEach(val => msg.reactions.get(args[1]).remove(val))
                             );
                         })
                         .catch(console.error);
