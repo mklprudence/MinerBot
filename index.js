@@ -33,7 +33,8 @@ const lyrics_SOU = [
     'Grab on my waist and put that body on me',
     'Come on now, follow my lead',
     'Come, come on now, follow my lead',
-    ' ',
+];
+const lyrics_SOU1 = [
     'I\'m in love with the shape of you',
     'We push and pull like a magnet do',
     'Although my heart is falling too',
@@ -59,7 +60,8 @@ const lyrics_SOU = [
     'And how your family is doing okay',
     'Leave and get in a taxi, then kiss in the backseat',
     'Tell the driver make the radio play, and I\'m singing like',
-    ' ',
+];
+const lyrics_SOU2 = [
     'Girl, you know I want your love',
     'Your love was handmade for somebody like me',
     'Come on now, follow my lead',
@@ -68,8 +70,7 @@ const lyrics_SOU = [
     'Grab on my waist and put that body on me',
     'Come on now, follow my lead',
     'Come, come on now, follow my lead',
-];
-const lyrics_SOU1 = [
+    ' ',
     'I\'m in love with the shape of you',
     'We push and pull like a magnet do',
     'Although my heart is falling too',
@@ -86,7 +87,8 @@ const lyrics_SOU1 = [
     'I\'m in love with your body',
     'Every day discovering something brand new',
     'I\'m in love with the shape of you',
-    ' ',
+];
+const lyrics_SOU3 = [
     'Come on, be my baby, come on',
     'Come on, be my baby, come on',
     'Come on, be my baby, come on',
@@ -649,7 +651,7 @@ client.on('message', async message => {
                             text: '©mklprudence',
                             icon_url: client.user.avatarURL,
                         },
-                    }, split: true });
+                    } });
                     message.channel.send({ embed: {
                         color: 16514816,
                         title: 'Shape of You Lyrics',
@@ -657,6 +659,36 @@ client.on('message', async message => {
                             {
                                 name: 'Shape of You by Ed Sheeran',
                                 value: lyrics_SOU1.join('\n'),
+                            },
+                        ],
+                        timestamp: new Date(),
+                        footer: {
+                            text: '©mklprudence',
+                            icon_url: client.user.avatarURL,
+                        },
+                    } });
+                    message.channel.send({ embed: {
+                        color: 16514816,
+                        title: 'Shape of You Lyrics',
+                        fields: [
+                            {
+                                name: 'Shape of You by Ed Sheeran',
+                                value: lyrics_SOU2.join('\n'),
+                            },
+                        ],
+                        timestamp: new Date(),
+                        footer: {
+                            text: '©mklprudence',
+                            icon_url: client.user.avatarURL,
+                        },
+                    } });
+                    message.channel.send({ embed: {
+                        color: 16514816,
+                        title: 'Shape of You Lyrics',
+                        fields: [
+                            {
+                                name: 'Shape of You by Ed Sheeran',
+                                value: lyrics_SOU3.join('\n'),
                             },
                         ],
                         timestamp: new Date(),
