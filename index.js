@@ -528,6 +528,7 @@ client.on('message', async message => {
                         }
                     })
                     .catch(console.error);
+                message.channel.send(`all human member added to ${rolemention.name}`);
             }
             else if (cmd == 'searchid') {
                 message.channel.send(message.guild.members.get(args[0]).user.username);
