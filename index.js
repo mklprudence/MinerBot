@@ -68,7 +68,8 @@ const lyrics_SOU = [
     'Grab on my waist and put that body on me',
     'Come on now, follow my lead',
     'Come, come on now, follow my lead',
-    ' ',
+];
+const lyrics_SOU1 = [
     'I\'m in love with the shape of you',
     'We push and pull like a magnet do',
     'Although my heart is falling too',
@@ -641,6 +642,21 @@ client.on('message', async message => {
                             {
                                 name: 'Shape of You by Ed Sheeran',
                                 value: lyrics_SOU.join('\n'),
+                            },
+                        ],
+                        timestamp: new Date(),
+                        footer: {
+                            text: '©mklprudence',
+                            icon_url: client.user.avatarURL,
+                        },
+                    } });
+                    message.channel.send({ embed: {
+                        color: 16514816,
+                        title: 'Shape of You Lyrics',
+                        fields: [
+                            {
+                                name: 'Shape of You by Ed Sheeran',
+                                value: lyrics_SOU1.join('\n'),
                             },
                         ],
                         timestamp: new Date(),
