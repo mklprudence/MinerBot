@@ -527,8 +527,8 @@ client.on('message', async message => {
                             await member.addRole(rolemention).catch(console.error);
                         }
                     })
+                    .then(message.channel.send(`all human member added to ${rolemention.name}`))
                     .catch(console.error);
-                message.channel.send(`all human member added to ${rolemention.name}`);
             }
             else if (cmd == 'searchid') {
                 message.channel.send(message.guild.members.get(args[0]).user.username);
