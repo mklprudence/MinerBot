@@ -523,7 +523,7 @@ client.on('message', async message => {
                 }
                 message.guild.fetchMembers()
                     .then(async function(guild) {
-                        for(let member of guild.members.filter(val => !val.user.bot).values()) {
+                        for(let member of guild.members.values()) {
                             await member.addRole(rolemention);
                         }
                     })
