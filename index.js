@@ -637,66 +637,71 @@ client.on('message', async message => {
             }
             else if (cmd == 'lyrics') {
                 if (args[0].toLowerCase() == 'sou' || 'shape of you') {
-                    message.channel.send({ embed: {
-                        color: 16514816,
-                        title: 'Shape of You Lyrics',
-                        fields: [
-                            {
-                                name: 'Shape of You by Ed Sheeran',
-                                value: lyrics_SOU.join('\n'),
+                    if (message.author.id == 377157652880293888 || message.author.id == 266401880362450944) {
+                        message.channel.send({ embed: {
+                            color: 16514816,
+                            title: 'Shape of You Lyrics',
+                            fields: [
+                                {
+                                    name: 'Shape of You by Ed Sheeran',
+                                    value: lyrics_SOU.join('\n'),
+                                },
+                            ],
+                            timestamp: new Date(),
+                            footer: {
+                                text: '©mklprudence',
+                                icon_url: client.user.avatarURL,
                             },
-                        ],
-                        timestamp: new Date(),
-                        footer: {
-                            text: '©mklprudence',
-                            icon_url: client.user.avatarURL,
-                        },
-                    } });
-                    message.channel.send({ embed: {
-                        color: 16514816,
-                        title: 'Shape of You Lyrics',
-                        fields: [
-                            {
-                                name: 'Shape of You by Ed Sheeran',
-                                value: lyrics_SOU1.join('\n'),
+                        } });
+                        message.channel.send({ embed: {
+                            color: 16514816,
+                            title: 'Shape of You Lyrics',
+                            fields: [
+                                {
+                                    name: 'Shape of You by Ed Sheeran',
+                                    value: lyrics_SOU1.join('\n'),
+                                },
+                            ],
+                            timestamp: new Date(),
+                            footer: {
+                                text: '©mklprudence',
+                                icon_url: client.user.avatarURL,
                             },
-                        ],
-                        timestamp: new Date(),
-                        footer: {
-                            text: '©mklprudence',
-                            icon_url: client.user.avatarURL,
-                        },
-                    } });
-                    message.channel.send({ embed: {
-                        color: 16514816,
-                        title: 'Shape of You Lyrics',
-                        fields: [
-                            {
-                                name: 'Shape of You by Ed Sheeran',
-                                value: lyrics_SOU2.join('\n'),
+                        } });
+                        message.channel.send({ embed: {
+                            color: 16514816,
+                            title: 'Shape of You Lyrics',
+                            fields: [
+                                {
+                                    name: 'Shape of You by Ed Sheeran',
+                                    value: lyrics_SOU2.join('\n'),
+                                },
+                            ],
+                            timestamp: new Date(),
+                            footer: {
+                                text: '©mklprudence',
+                                icon_url: client.user.avatarURL,
                             },
-                        ],
-                        timestamp: new Date(),
-                        footer: {
-                            text: '©mklprudence',
-                            icon_url: client.user.avatarURL,
-                        },
-                    } });
-                    message.channel.send({ embed: {
-                        color: 16514816,
-                        title: 'Shape of You Lyrics',
-                        fields: [
-                            {
-                                name: 'Shape of You by Ed Sheeran',
-                                value: lyrics_SOU3.join('\n'),
+                        } });
+                        message.channel.send({ embed: {
+                            color: 16514816,
+                            title: 'Shape of You Lyrics',
+                            fields: [
+                                {
+                                    name: 'Shape of You by Ed Sheeran',
+                                    value: lyrics_SOU3.join('\n'),
+                                },
+                            ],
+                            timestamp: new Date(),
+                            footer: {
+                                text: '©mklprudence',
+                                icon_url: client.user.avatarURL,
                             },
-                        ],
-                        timestamp: new Date(),
-                        footer: {
-                            text: '©mklprudence',
-                            icon_url: client.user.avatarURL,
-                        },
-                    } });
+                        } });
+                    }
+                    else {
+                        message.channel.send('Sorry only JackIsBeast#0653 can access this command');
+                    }
                 }
             }
         }
