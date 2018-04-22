@@ -322,7 +322,7 @@ client.on('message', async message => {
                         .catch(console.error);*/
                     message.channel.fetchMessage(args[0])
                         .then(msg => message.channel.send(`message content:${msg}`))
-                        .then(msg => message.channel.send(msg.reactions.get(args[1]).emoji.toString() || 'no user here'))
+                        .then(msg => message.channel.send(msg.reactions.get(args[1]).users || 'no user here'))
                         .catch(console.error);
                 }
             }
