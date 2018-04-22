@@ -522,7 +522,11 @@ client.on('message', async message => {
                     return message.channel.send('Please mention a role in the command');
                 }
                 message.guild.fetchMembers()
-                    .then(guild => guild.members.filter(val => !val.user.bot).forEach(val => val.addRole(rolemention)))
+                    .then(function(guild) {
+                        for(let member of guild.members.filter(val => !val.user.bot).values()) {
+                            member.addRole(rolemention);
+                        }
+                    })
                     .catch(console.error);
             }
         }
