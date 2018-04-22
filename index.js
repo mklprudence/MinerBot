@@ -320,7 +320,9 @@ client.on('message', async message => {
                     /* message.channel.fetchMessage(args[0])
                         .then(msg => msg.reactions.get(args[1]).users.forEach((user, key, map) => message.channel.send(user.username)))
                         .catch(console.error);*/
+                    const msg;
                     message.channel.fetchMessage(args[0])
+                        .then(val => msg = val)
                         .then(msg => message.channel.send(`message content:${msg}`))
                         .then(msg => message.channel.send(msg.reactions.get(args[1]).users || 'no user here'))
                         .catch(console.error);
