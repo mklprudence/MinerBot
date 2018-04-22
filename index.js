@@ -649,7 +649,7 @@ client.on('message', async message => {
                             text: '©mklprudence',
                             icon_url: client.user.avatarURL,
                         },
-                    } });
+                    }, split: true });
                     message.channel.send({ embed: {
                         color: 16514816,
                         title: 'Shape of You Lyrics',
