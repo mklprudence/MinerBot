@@ -322,7 +322,11 @@ client.on('message', async message => {
                         .catch(console.error);*/
                     console.log(client.users);
                     message.channel.fetchMessage(args[0])
-                        .then(msg => console.log(msg.reactions.get(args[1]).users || 'no user here'))
+                        .then(function(msg) {
+                            msg.reactions.get(args[1]).fetchUsers().then(
+                                users => console.log(users)
+                            );
+                        })
                         .catch(console.error);
                 }
             }
