@@ -523,11 +523,14 @@ client.on('message', async message => {
                 }
                 message.guild.fetchMembers()
                     .then(async function(guild) {
-                        for(let member of guild.members.values()) {
+                        for(let member of guild.members.filter(val => !val.user.bot).values()) {
                             await member.addRole(rolemention);
                         }
                     })
                     .catch(console.error);
+            }
+            else if (cmd == 'searchid') {
+                message.channel.send(message.guild.members.get(args[0]).user.username);
             }
         }
     }
