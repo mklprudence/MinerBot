@@ -516,6 +516,14 @@ client.on('message', async message => {
                     message.channel.send('Sorry ' + message.author.username + ', You do not have permission to do so');
                 }
             }
+            else if (cmd == 'alladdrole') {
+                var rolemention = message.mentions.roles.first();
+                if(!rolemention) {
+                    return message.channel.send('Please mention a role in the command');
+                }
+                message.guild.fetchMembers()
+                    .then(console.log);
+            }
         }
     }
 
