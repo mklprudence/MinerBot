@@ -574,3 +574,5 @@ client.on('presenceUpdate', (oldMember, newMember)=> {
         userSession.logout(newMember.user.id);
     }
 });
+
+process.on('unhandledRejection', err => console.error(`Uncaught Promise Rejection: \n${err.stack}`));
