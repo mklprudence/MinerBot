@@ -524,13 +524,32 @@ client.on('message', async message => {
                 message.guild.fetchMembers()
                     .then(async function(guild) {
                         for(let member of guild.members.filter(val => !val.user.bot).values()) {
-                            await member.addRole(rolemention);
+                            await member.addRole(rolemention).catch(console.error);
                         }
                     })
                     .catch(console.error);
             }
             else if (cmd == 'searchid') {
                 message.channel.send(message.guild.members.get(args[0]).user.username);
+            }
+            else if (cmd == 'lyrics') {
+                if (args[0].toLowerCase() == 'sou' || 'shape of you') {
+                    message.channel.send({ embed: {
+                        color: 16514816,
+                        title: 'Shape of You Lyrics',
+                        fields: [
+                            {
+                                name: 'Shape of You by Ed Sheeran',
+                                value: lyrics_SOU.join('\n'),
+                            },
+                        ],
+                        timestamp: new Date(),
+                        footer: {
+                            text: '©mklprudence',
+                            icon_url: client.user.avatarURL,
+                        },
+                    } });
+                }
             }
         }
     }
