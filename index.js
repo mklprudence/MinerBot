@@ -522,7 +522,7 @@ client.on('message', async message => {
                     return message.channel.send('Please mention a role in the command');
                 }
                 message.guild.fetchMembers()
-                    .then(console.log);
+                    .then(members => console.log(members));
             }
         }
     }
