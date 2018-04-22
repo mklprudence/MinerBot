@@ -317,14 +317,13 @@ client.on('message', async message => {
                     }
                 }
                 else if (cmd == 'removereaction') {
-                    /* message.channel.fetchMessage(args[0])
-                        .then(msg => msg.reactions.get(args[1]).users.forEach((user, key, map) => message.channel.send(user.username)))
-                        .catch(console.error);*/
                     message.channel.fetchMessage(args[0])
                         .then(function(msg) {
                             msg.reactions.get(args[1]).fetchUsers().then(
                                 users => users.forEach(val => msg.reactions.get(args[1]).remove(val))
-                            );
+                            )
+                            .catch(console.error);
+                            message.channel.send(`Reaction ${args[1]} Removed from message ${args[0]}`);
                         })
                         .catch(console.error);
                 }
