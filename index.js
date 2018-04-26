@@ -635,7 +635,7 @@ client.on('message', async message => {
                     ' ',
                     '.',
                 ];
-                if (arg[0].toLowerCase() == 'staff') {
+                if (args[0].toLowerCase() == 'staff') {
                     message.channel.send({ embed: {
                         color: 16514816,
                         title: 'MKLBot Staff Command Help',
