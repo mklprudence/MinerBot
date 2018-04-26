@@ -705,8 +705,15 @@ client.on('message', async message => {
                 }
             }
             else if (cmd == 'rickroll') {
-                message.channel.send('Custom Command Giveaway #1, won by <@280678895714435072>, 26 Apr 2018');
-                message.channel.send('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+                if (message.author.id == 280678895714435072) {
+                    message.channel.send('Custom Command Giveaway #1, won by <@280678895714435072>, 26 Apr 2018');
+                    message.channel.send('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+                }
+                else {
+                    message.channel.send('You don\'t have permission to do this!!!');
+                    message.channel.send(`Custom Command Giveaway #1, won by ${message.guild.members.get(280678895714435072).user.username}, 26 Apr 2018`);
+                    message.channel.send(`Command only accessable by ${message.guild.members.get(280678895714435072).user.username}`);
+                }
             }
         }
     }
