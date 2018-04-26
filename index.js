@@ -605,7 +605,35 @@ client.on('message', async message => {
                     '.',
                 ];
                 const help_searchid = [
-
+                    '[-PlayerID]    REQUIRED    client ID / discord ID of the target',
+                    ' ',
+                    'The bot will return the username of the target with the given PlayerID',
+                    ' ',
+                    ' ',
+                    '.',
+                ];
+                const help_alladdrole = [
+                    '[-RoleMention]   REQUIRED   eg. @Admin, @VIP',
+                    ' ',
+                    'Add all members from the entire guild to the Role mentioned in [-RoleMention]',
+                    ' ',
+                    '***WARNING!!!***',
+                    'Be cautious when using this command!!! Be sure that you mentioned the correct role before sendin the command!!! Though the adding role process takes 2min+, there is no way to stop the process!!!',
+                    'Contact mklprud3nce#0218 AT ONCE if any such mistakes have been made, because this means some more commands for him to programme',
+                    ' ',
+                    ' ',
+                    '.',
+                ];
+                const help_lyrics = [
+                    '[-Song]    REQUIRED    name or abbre. of song name',
+                    ' ',
+                    'Display the full lyrics of the song',
+                    ' ',
+                    'Song List: ',
+                    '\'SOU\' / \'Shape of You\': Shape of You by EdSheeran (ONLY accessable by JackIsBeast)',
+                    ' ',
+                    ' ',
+                    '.',
                 ];
                 if (arg[0].toLowerCase() == 'staff') {
                     message.channel.send({ embed: {
@@ -623,8 +651,17 @@ client.on('message', async message => {
                                 value: help_removereaction.join('\n'),
                             },
                             {
-                                name: `${prefix_GamingInc}searchid [-PlayerID]  (`
+                                name: `${prefix_GamingInc}searchid [-PlayerID]  (Admin+)`,
+                                value: help_searchid.join('\n'),
                             },
+                            {
+                                name: `${prefix_GamingInc}alladdrole [-RoleMention]`,
+                                value: help_alladdrole.join('\n'),
+                            },
+                            {
+                                name: `${prefix_GamingInc}help Staff`,
+                                value: 'Display this Staff command list.\n\n\n.',
+                            }
                         ],
                         timestamp: new Date(),
                         footer: {
@@ -651,6 +688,10 @@ client.on('message', async message => {
                             {
                                 name: `${prefix_GamingInc}rickroll`,
                                 value: help_rickroll.join('\n'),
+                            },
+                            {
+                                name: `${prefix_GamingInc}lyrics [-Song]`,
+                                value: help_lyrics.join('\n'),
                             },
                         ],
                         timestamp: new Date(),
