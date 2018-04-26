@@ -558,9 +558,11 @@ client.on('message', async message => {
                 ];
                 const help_login = [
                     '[-PlayerMention]   OPTIONAL   eg. @JackTheBeast',
+                    '[-Staff]   OPTIONAL eg. \'Staff\', \'StAfF\', \'staff\'',
                     ' ',
                     'If given [-PlayerMention], Bot will display detailed login data of the player',
-                    'If not given [-PlayerMention], Bot will display all total login time of all players',
+                    'If given [-Staff], Bot will display login time of all staff member',
+                    'If not given both, Bot will display all total login time of all players',
                     ' ',
                     ' ',
                     '.',
@@ -577,30 +579,87 @@ client.on('message', async message => {
                     ' ',
                     '.',
                 ];
-                message.channel.send({ embed: {
-                    color: 16514816,
-                    title: 'MKLBot Command Help',
-                    description: description.join('\n'),
-                    fields: [
-                        {
-                            name: `${prefix_GamingInc}ping`,
-                            value: help_ping.join('\n'),
+                const description_staff = [
+                    `The prefix of the bot is ${prefix_GamingInc}`,
+                    'This help shows ONLY staff commands',
+                    ' ',
+                    ' ',
+                    '.',
+                ]
+                const help_removereaction = [
+                    '[-MsgID]   REQUIRED    obtained by right-clicking a message and press copyID',
+                    '[-Emoji]   REQUIRED    eg. :joy:, :regional_indicator_N:',
+                    ' ',
+                    'Removes all users from the reaction [-Emoji] in the message with ID [-MsgID]',
+                    ' ',
+                    ' ',
+                    '.',
+                ];
+                const help_rickroll = [
+                    'Custom Command Giveaway #1, won by Soldier Gaming#4496, 26 Apr 2018',
+                    'Only accessable by the winner',
+                    ' ',
+                    'Displays the \'Rick Astley - Never Gonna Give You Up\' Video',
+                    ' ',
+                    ' ',
+                    '.',
+                ];
+                const help_searchid = [
+
+                ];
+                if (arg[0].toLowerCase() == 'staff') {
+                    message.channel.send({ embed: {
+                        color: 16514816,
+                        title: 'MKLBot Staff Command Help',
+                        description: description_staff.join('\n'),
+                        thumbnail: client.user.avatarURL,
+                        fields: [
+                            {
+                                name: `${prefix_GamingInc}login [-PlayerMention] [-Staff]  (ADMIN+)`,
+                                value: help_login.join('\n'),
+                            },
+                            {
+                                name: `${prefix_GamingInc}removereaction [-MsgID] [-Emoji]  (Admin+)`,
+                                value: help_removereaction.join('\n'),
+                            },
+                            {
+                                name: `${prefix_GamingInc}searchid [-PlayerID]  (`
+                            },
+                        ],
+                        timestamp: new Date(),
+                        footer: {
+                            text: '©mklprudence',
+                            icon_url: client.user.avatarURL,
                         },
-                        {
-                            name: `${prefix_GamingInc}login [-PlayerMention] (REQUIRES ADMIN)`,
-                            value: help_login.join('\n'),
+                    } });
+                }
+                else {
+                    message.channel.send({ embed: {
+                        color: 16514816,
+                        title: 'MKLBot Command Help',
+                        description: description.join('\n'),
+                        thumbnail: client.user.avatarURL,
+                        fields: [
+                            {
+                                name: `${prefix_GamingInc}ping`,
+                                value: help_ping.join('\n'),
+                            },
+                            {
+                                name: `${prefix_GamingInc}help`,
+                                value: help_help.join('\n'),
+                            },
+                            {
+                                name: `${prefix_GamingInc}rickroll`,
+                                value: help_rickroll.join('\n'),
+                            },
+                        ],
+                        timestamp: new Date(),
+                        footer: {
+                            text: '©mklprudence',
+                            icon_url: client.user.avatarURL,
                         },
-                        {
-                            name: `${prefix_GamingInc}help`,
-                            value: help_help.join('\n'),
-                        },
-                    ],
-                    timestamp: new Date(),
-                    footer: {
-                        text: '©mklprudence',
-                        icon_url: client.user.avatarURL,
-                    },
-                } });
+                    } });
+                }
             }
             else if (cmd == 'removereaction') {
                 if (isAdmin) {
@@ -633,7 +692,9 @@ client.on('message', async message => {
                     .catch(console.error);
             }
             else if (cmd == 'searchid') {
-                message.channel.send(message.guild.members.get(args[0]).user.username);
+                if (isAdmin) {
+                    message.channel.send(message.guild.members.get(args[0]).user.username);
+                }
             }
             else if (cmd == 'lyrics') {
                 if (args[0].toLowerCase() == 'sou' || 'shape of you') {
