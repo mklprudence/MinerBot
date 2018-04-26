@@ -704,6 +704,10 @@ client.on('message', async message => {
                     }
                 }
             }
+            else if (cmd == 'rickroll') {
+                message.channel.send('Custom Command Giveaway #1, won by <@280678895714435072>, 26 Apr 2018');
+                message.channel.send('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+            }
         }
     }
 
