@@ -640,7 +640,6 @@ client.on('message', async message => {
                         color: 16514816,
                         title: 'MKLBot Command Help',
                         description: description.join('\n'),
-                        thumbnail: client.user.avatarURL,
                         fields: [
                             {
                                 name: `${prefix_GamingInc}ping`,
@@ -671,7 +670,6 @@ client.on('message', async message => {
                         color: 16514816,
                         title: 'MKLBot Staff Command Help',
                         description: description_staff.join('\n'),
-                        thumbnail: client.user.avatarURL,
                         fields: [
                             {
                                 name: `${prefix_GamingInc}login [-PlayerMention] [-Staff]  (ADMIN+)`,
