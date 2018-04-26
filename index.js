@@ -635,7 +635,38 @@ client.on('message', async message => {
                     ' ',
                     '.',
                 ];
-                if (args[0].toLowerCase() == 'staff') {
+                if (args[0] == undefined) {
+                    message.channel.send({ embed: {
+                        color: 16514816,
+                        title: 'MKLBot Command Help',
+                        description: description.join('\n'),
+                        thumbnail: client.user.avatarURL,
+                        fields: [
+                            {
+                                name: `${prefix_GamingInc}ping`,
+                                value: help_ping.join('\n'),
+                            },
+                            {
+                                name: `${prefix_GamingInc}help`,
+                                value: help_help.join('\n'),
+                            },
+                            {
+                                name: `${prefix_GamingInc}rickroll`,
+                                value: help_rickroll.join('\n'),
+                            },
+                            {
+                                name: `${prefix_GamingInc}lyrics [-Song]`,
+                                value: help_lyrics.join('\n'),
+                            },
+                        ],
+                        timestamp: new Date(),
+                        footer: {
+                            text: '©mklprudence',
+                            icon_url: client.user.avatarURL,
+                        },
+                    } });
+                }
+                else if (args[0].toLowerCase() == 'staff') {
                     message.channel.send({ embed: {
                         color: 16514816,
                         title: 'MKLBot Staff Command Help',
@@ -662,37 +693,6 @@ client.on('message', async message => {
                                 name: `${prefix_GamingInc}help Staff`,
                                 value: 'Display this Staff command list.\n\n\n.',
                             }
-                        ],
-                        timestamp: new Date(),
-                        footer: {
-                            text: '©mklprudence',
-                            icon_url: client.user.avatarURL,
-                        },
-                    } });
-                }
-                else {
-                    message.channel.send({ embed: {
-                        color: 16514816,
-                        title: 'MKLBot Command Help',
-                        description: description.join('\n'),
-                        thumbnail: client.user.avatarURL,
-                        fields: [
-                            {
-                                name: `${prefix_GamingInc}ping`,
-                                value: help_ping.join('\n'),
-                            },
-                            {
-                                name: `${prefix_GamingInc}help`,
-                                value: help_help.join('\n'),
-                            },
-                            {
-                                name: `${prefix_GamingInc}rickroll`,
-                                value: help_rickroll.join('\n'),
-                            },
-                            {
-                                name: `${prefix_GamingInc}lyrics [-Song]`,
-                                value: help_lyrics.join('\n'),
-                            },
                         ],
                         timestamp: new Date(),
                         footer: {
