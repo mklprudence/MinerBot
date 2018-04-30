@@ -6,7 +6,9 @@ const Sequelize = require('sequelize');
     logging: false,
 });*/
 
-const sequelize = new Sequelize('postgres://iabqwsabhctrbv:0ab16a079b652c0a05beccdf090ae4cae3a5c8c29448044c894117cd113e8f26@ec2-54-83-204-6.compute-1.amazonaws.com:5432/d79ntsduij03ps');
+const sequelize = new Sequelize('postgres://iabqwsabhctrbv:0ab16a079b652c0a05beccdf090ae4cae3a5c8c29448044c894117cd113e8f26@ec2-54-83-204-6.compute-1.amazonaws.com:5432/d79ntsduij03ps', {
+    logging: false,
+});
 
 const Users = sequelize.import('models/Users');
 
