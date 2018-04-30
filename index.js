@@ -454,7 +454,7 @@ client.on('message', async message => {
             let cmd = args.shift();
             let isAdmin = message.member.hasPermission('ADMINISTRATOR');
 
-            if (cmd == 'ping') {
+            if (cmd == 'botinfo') {
                 if (true) {
                     message.channel.send('The Bot Ping: ' + client.ping);
                     message.channel.send('The Bot Uptime: ' + client.uptime);
