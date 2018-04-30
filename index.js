@@ -630,7 +630,7 @@ client.on('message', async message => {
                     'Display the full lyrics of the song',
                     ' ',
                     'Song List: ',
-                    '\'SOU\' / \'Shape of You\': Shape of You by EdSheeran (ONLY accessable by JackIsBeast)',
+                    '\'SOU\' / \'Shape of You\': Shape of You by Ed Sheeran (ONLY accessable by JackIsBeast)',
                     ' ',
                     ' ',
                     '.',
