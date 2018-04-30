@@ -448,7 +448,7 @@ client.on('message', async message => {
     }
 
     // GamingInc Server
-    if (message.guild.id == '423877278510874644' || simServer == 423877278510874644) {
+    if (message.guild.id == '423877278510874644' || message.guild.id == '439736642392162316' || simServer == 423877278510874644) {
         if (message.content.startsWith(prefix_GamingInc)) {
             let args = message.content.substring(prefix_GamingInc.length).split(' ');
             let cmd = args.shift();
