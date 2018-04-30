@@ -815,6 +815,14 @@ client.on('message', async message => {
                     message.channel.send(`Command only accessable by ${message.guild.members.get(280678895714435072).user.username}`);
                 }
             }
+            else if (cmd == 'pingunsub') {
+                message.member.removeRole('440532819958169601');
+                message.channel.send(`Removed <@${message.author.id}> from the Ping role`);
+            }
+            else if (cmd == 'pingsub') {
+                message.member.addRole('440532819958169601');
+                message.channel.send(`Added <@${message.author.id}> to the Ping role`);
+            }
         }
     }
 
