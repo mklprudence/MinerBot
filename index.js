@@ -827,13 +827,13 @@ client.on('message', async message => {
                 if (isAdmin) {
                     var target;
                     if (message.mentions.members.first()) {
-                        target = message.mentions.members.first();
+                        target = message.mentions.members.first() || message.member;
                     }
                     else if (Number.isInteger(Number(args[0]))) {
-                        target = message.guild.members.get(args[0]);
+                        target = message.guild.members.get(args[0]) || message.member;
                     }
                     else {
-                        target = message.guild.members.find('nickname', args.join(' ')) || message.guild.members.find(val => val.user.username == args.join(' '));
+                        target = message.guild.members.find('nickname', args.join(' ')) || message.guild.members.find(val => val.user.username == args.join(' ')) || message.member;
                     }
                     message.channel.send({ embed: {
                         color: 16514816,
