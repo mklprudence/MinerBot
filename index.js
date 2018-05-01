@@ -872,7 +872,7 @@ client.on('message', async message => {
                                     `Join Time: ${target.joinedAt}`,
                                     `Nickname: ${target.nickname}`,
                                     `Status: ${target.presence.status}`,
-                                    `Game Playing: ${target.presence.game.name || 'No Game Playing'}`,
+                                    `Game Playing: ${target.presence.game ? target.presence.game.name : 'No Game Playing'}`,
                                     `Stream URL: ${target.presence.game.url || 'Not Streaming'}`,
                                     `Activity Type: ${target.presence.game.type || 'No Activity'}`,
                                 ].join('\n'),
