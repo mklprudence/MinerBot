@@ -853,7 +853,9 @@ client.on('message', async message => {
                                 `Join Time: ${target.joinedAt}`,
                                 `Nickname: ${target.nickname}`,
                                 `Status: ${target.presence.status}`,
-                                `Playing: ${target.presence.game || 'Nothing'}`,
+                                `Game Playing: ${target.presence.game.name || 'No Game Playing'}`,
+                                `Stream URL: ${target.presence.game.url || 'Not Streaming'}`,
+                                `Activity Type: ${target.presence.game.type || 'No Activity'}`,
                             ].join('\n'),
                         },
                         {
