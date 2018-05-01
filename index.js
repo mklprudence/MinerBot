@@ -730,11 +730,6 @@ client.on('message', async message => {
                     .then(message.channel.send(`all human member added to ${rolemention.name}`))
                     .catch(console.error);
             }
-            else if (cmd == 'searchid') {
-                if (isAdmin) {
-                    message.channel.send(message.guild.members.get(args[0]).user.username);
-                }
-            }
             else if (cmd == 'lyrics') {
                 if (args[0].toLowerCase() == 'sou' || 'shape of you') {
                     if (message.author.id == 377157652880293888 || message.author.id == 266401880362450944) {
