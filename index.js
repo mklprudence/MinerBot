@@ -831,6 +831,9 @@ client.on('message', async message => {
                 else if (Number.isInteger(Number(args[0]))) {
                     target = message.guild.members.get(args[0]);
                 }
+                else {
+                    target = message.guild.members.find('nickname', args.join(' ')) || message.guild.members.find('username', args.join(' '));
+                }
                 message.channel.send(`ID: ${target.id}`);
             }
         }
