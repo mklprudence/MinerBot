@@ -824,51 +824,56 @@ client.on('message', async message => {
                 message.channel.send(`Added <@${message.author.id}> to the Ping role`);
             }
             else if (cmd == 'userinfo') {
-                var target;
-                if (message.mentions.members.first()) {
-                    target = message.mentions.members.first();
-                }
-                else if (Number.isInteger(Number(args[0]))) {
-                    target = message.guild.members.get(args[0]);
+                if (isAdmin) {
+                    var target;
+                    if (message.mentions.members.first()) {
+                        target = message.mentions.members.first();
+                    }
+                    else if (Number.isInteger(Number(args[0]))) {
+                        target = message.guild.members.get(args[0]);
+                    }
+                    else {
+                        target = message.guild.members.find('nickname', args.join(' ')) || message.guild.members.find(val => val.user.username == args.join(' '));
+                    }
+                    message.channel.send({ embed: {
+                        color: 16514816,
+                        title: `User Info of ${target.user.username}`,
+                        description: `User Information Query by <@${message.author.id}>`,
+                        fields: [
+                            {
+                                name: 'Basic Info',
+                                value: [
+                                    `Username: ${target.user.username}`,
+                                    `ID: ${target.id}`,
+                                    `Tag: ${target.user.tag}`,
+                                ].join('\n'),
+                            },
+                            {
+                                name: 'Server Info',
+                                value: [
+                                    `Join Time: ${target.joinedAt}`,
+                                    `Nickname: ${target.nickname}`,
+                                    `Status: ${target.presence.status}`,
+                                    `Game Playing: ${target.presence.game.name || 'No Game Playing'}`,
+                                    `Stream URL: ${target.presence.game.url || 'Not Streaming'}`,
+                                    `Activity Type: ${target.presence.game.type || 'No Activity'}`,
+                                ].join('\n'),
+                            },
+                            {
+                                name: 'Roles',
+                                value: target.roles.sort((a, b) => b.comparePositionTo(a)).map(roles => roles.name).join('\n'),
+                            },
+                        ],
+                        timestamp: new Date(),
+                        footer: {
+                            text: '©mklprudence',
+                            icon_url: client.user.avatarURL,
+                        },
+                    } });
                 }
                 else {
-                    target = message.guild.members.find('nickname', args.join(' ')) || message.guild.members.find(val => val.user.username == args.join(' '));
+                    message.channel.send('Sorry, you don\'t have the permission to do this');
                 }
-                message.channel.send({ embed: {
-                    color: 16514816,
-                    title: `User Info of ${target.user.username}`,
-                    description: `User Information Query by <@${message.author.id}>`,
-                    fields: [
-                        {
-                            name: 'Basic Info',
-                            value: [
-                                `Username: ${target.user.username}`,
-                                `ID: ${target.id}`,
-                                `Tag: ${target.user.tag}`,
-                            ].join('\n'),
-                        },
-                        {
-                            name: 'Server Info',
-                            value: [
-                                `Join Time: ${target.joinedAt}`,
-                                `Nickname: ${target.nickname}`,
-                                `Status: ${target.presence.status}`,
-                                `Game Playing: ${target.presence.game.name || 'No Game Playing'}`,
-                                `Stream URL: ${target.presence.game.url || 'Not Streaming'}`,
-                                `Activity Type: ${target.presence.game.type || 'No Activity'}`,
-                            ].join('\n'),
-                        },
-                        {
-                            name: 'Roles',
-                            value: target.roles.sort((a, b) => b.comparePositionTo(a)).map(roles => roles.name).join('\n'),
-                        },
-                    ],
-                    timestamp: new Date(),
-                    footer: {
-                        text: '©mklprudence',
-                        icon_url: client.user.avatarURL,
-                    },
-                } });
             }
         }
     }
