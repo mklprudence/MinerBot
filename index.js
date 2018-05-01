@@ -834,7 +834,27 @@ client.on('message', async message => {
                 else {
                     target = message.guild.members.find('nickname', args.join(' ')) || message.guild.members.find(val => val.user.username == args.join(' '));
                 }
-                message.channel.send(`ID: ${target.id}`);
+                message.channel.send({ embed: {
+                    color: 16514816,
+                    title: `User Info of ${target.nickname}`,
+                    description: `User Information Query by <@${message.author.id}>`,
+                    fields: [
+                        {
+                            name: 'Basic Info',
+                            value: [
+                                `Username: ${target.user.username}`,
+                                `Nickname: ${target.nickname}`,
+                                `ID: ${target.id}`,
+                                `Tag: ${target.user.tag}`,
+                            ].join('\n'),
+                        },
+                    ],
+                    timestamp: new Date(),
+                    footer: {
+                        text: '©mklprudence',
+                        icon_url: client.user.avatarURL,
+                    },
+                } });
             }
         }
     }
