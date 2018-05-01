@@ -823,6 +823,16 @@ client.on('message', async message => {
                 message.member.addRole('440532819958169601');
                 message.channel.send(`Added <@${message.author.id}> to the Ping role`);
             }
+            else if (cmd == 'userinfo') {
+                var target;
+                if (message.mentions.members.first()) {
+                    target = message.mentions.members.first();
+                }
+                else if (Number.isInteger(Number(args[0]))) {
+                    target = message.guild.members.get(Number(args[0]));
+                }
+                message.channel.send(`ID: ${target.id}`);
+            }
         }
     }
 
