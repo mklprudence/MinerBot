@@ -640,7 +640,17 @@ client.on('message', async message => {
                     ' ',
                     '.',
                 ];
-                if (args[0] == undefined) {
+                const help_pingsub = [
+                    'This command adds you to the Ping announcement alert role, and alert you when an announcemnet comes in',
+                    ' ',
+                    'Use m!pingunsub to unsubscribe from the announcement alert',
+                ];
+                const help_pingunsub = [
+                    'This command removes you from the Ping announcement alert role, and stop alerting you when an announcemnet comes in',
+                    ' ',
+                    'Use m!pingsub to resubscribe to the announcement alert',
+                ]
+                if (args[0] == undefined || args[0].toLowerCase() !== 'staff') {
                     message.channel.send({ embed: {
                         color: 16514816,
                         title: 'MKLBot Command Help',
@@ -661,6 +671,14 @@ client.on('message', async message => {
                             {
                                 name: `${prefix_GamingInc}lyrics [-Song]`,
                                 value: help_lyrics.join('\n'),
+                            },
+                            {
+                                name: `${prefix_GamingInc}pingsub`,
+                                value: help_pingsub.join('\n'),
+                            },
+                            {
+                                name: `${prefix_GamingInc}pingunsub`,
+                                value: help_pingunsub.join('\n'),
                             },
                         ],
                         timestamp: new Date(),
