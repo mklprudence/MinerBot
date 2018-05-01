@@ -604,10 +604,15 @@ client.on('message', async message => {
                     ' ',
                     '.',
                 ];
-                const help_searchid = [
-                    '[-PlayerID]    REQUIRED    client ID / discord ID of the target',
+                const help_userinfo = [
+                    '[-UserKey]    REQUIRED    Can be the following User info type',
+                    `   1. User ID, eg. ${message.author.id}`,
+                    `   2. User username, eg. ${message.author.username} (CASE-SENSITIVE)`,
+                    `   3. User nickname, eg. ${message.member.nickname} (CASE-SENSITIVE)`,
+                    `   4. User mention, eg. <@${message.author.id}>`,
+                    '   5. If no valid [-UserKey] is given, the command sender will be the target',
                     ' ',
-                    'The bot will return the username of the target with the given PlayerID',
+                    'The Command will display detailed user information of the target user',
                     ' ',
                     ' ',
                     '.',
@@ -680,8 +685,8 @@ client.on('message', async message => {
                                 value: help_removereaction.join('\n'),
                             },
                             {
-                                name: `${prefix_GamingInc}searchid [-PlayerID]  (Admin+)`,
-                                value: help_searchid.join('\n'),
+                                name: `${prefix_GamingInc}userinfo [-UserKey]  (Admin+)`,
+                                value: help_userinfo.join('\n'),
                             },
                             {
                                 name: `${prefix_GamingInc}alladdrole [-RoleMention]`,
