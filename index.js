@@ -829,7 +829,7 @@ client.on('message', async message => {
                     target = message.mentions.members.first();
                 }
                 else if (Number.isInteger(Number(args[0]))) {
-                    target = message.guild.members.get(Number(args[0]));
+                    target = message.guild.members.get(args[0]);
                 }
                 message.channel.send(`ID: ${target.id}`);
             }
