@@ -858,7 +858,7 @@ client.on('message', async message => {
                         },
                         {
                             name: 'Roles',
-                            value: target.roles.map(roles => roles.name).join('\n'),
+                            value: target.roles.sort((a, b) => a.comparePositionTo(b)).map(roles => roles.name).join('\n'),
                         },
                     ],
                     timestamp: new Date(),
