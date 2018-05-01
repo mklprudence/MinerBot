@@ -836,17 +836,29 @@ client.on('message', async message => {
                 }
                 message.channel.send({ embed: {
                     color: 16514816,
-                    title: `User Info of ${target.nickname}`,
+                    title: `User Info of ${target.user.username}`,
                     description: `User Information Query by <@${message.author.id}>`,
                     fields: [
                         {
                             name: 'Basic Info',
                             value: [
                                 `Username: ${target.user.username}`,
-                                `Nickname: ${target.nickname}`,
                                 `ID: ${target.id}`,
                                 `Tag: ${target.user.tag}`,
                             ].join('\n'),
+                        },
+                        {
+                            name: 'Server Info',
+                            value: [
+                                `Join Time: ${target.joinedAt}`,
+                                `Nickname: ${target.nickname}`,
+                                `Status: ${target.presence.status}`,
+                                `Playing: ${target.presence.game || 'Nothing'}`,
+                            ].join('\n'),
+                        },
+                        {
+                            name: 'Roles',
+                            value: target.roles.map(roles => roles.name).join('\n'),
                         },
                     ],
                     timestamp: new Date(),
