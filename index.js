@@ -757,18 +757,20 @@ client.on('message', async message => {
                 }
             }
             else if (cmd == 'alladdrole') {
-                var rolemention = message.mentions.roles.first();
-                if(!rolemention) {
-                    return message.channel.send('Please mention a role in the command');
+                if (isHA) {
+                    var rolemention = message.mentions.roles.first();
+                    if(!rolemention) {
+                        return message.channel.send('Please mention a role in the command');
+                    }
+                    message.guild.fetchMembers()
+                        .then(async function(guild) {
+                            for(let member of guild.members.filter(val => !val.user.bot).values()) {
+                                await member.addRole(rolemention).catch(console.error);
+                            }
+                        })
+                        .then(message.channel.send(`all human member added to ${rolemention.name}`))
+                        .catch(console.error);
                 }
-                message.guild.fetchMembers()
-                    .then(async function(guild) {
-                        for(let member of guild.members.filter(val => !val.user.bot).values()) {
-                            await member.addRole(rolemention).catch(console.error);
-                        }
-                    })
-                    .then(message.channel.send(`all human member added to ${rolemention.name}`))
-                    .catch(console.error);
             }
             else if (cmd == 'lyrics') {
                 if (args[0].toLowerCase() == 'sou' || 'shape of you') {
