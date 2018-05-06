@@ -934,6 +934,24 @@ client.on('message', async message => {
                     message.channel.send('Updating RSS');
                 }
             }
+            else if (cmd == 'archivejira' || cmd == 'jiraarchive') {
+                if (isHA) {
+                    if (message.channel.id == '439935281647583248') {
+                        message.channel.fetchMessage(args[0])
+                            .then(function(msg) {
+                                client.channels.get('442745963824676886').send(msg.content);
+                                msg.delete(1000);
+                            })
+                            .catch(console.error);
+                    }
+                    else {
+                        message.channel.send('Please do it in <#439935281647583248>').then(msg => client.setTimeout(function(){msg.delete()}, 20000));
+                    }
+                }
+                else {
+                    message.channel.send('You dont have permission to do so').then(msg => client.setTimeout(function(){msg.delete()}, 20000));
+                }
+            }
         }
     }
 
