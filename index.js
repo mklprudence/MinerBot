@@ -116,6 +116,17 @@ const lyrics_SOU3 = [
     'I\'m in love with the shape of you',
 ];
 
+// setup RSS
+const RSSrolelist = [
+    '440699202251784192',
+    '440698928330178571',
+    '440698717725655040',
+    '440698334651482123',
+    '440698578503991298',
+    '440699557282709505',
+    '440532819958169601',
+];
+
 // require the discord.js module
 const Discord = require('discord.js');
 
@@ -186,6 +197,7 @@ client.once('ready', async () => {
     storedUserSession.forEach(s => userSession.set(s.user_id, s));
     console.log(`Logged in as ${client.user.tag}!`);
 });
+
 // login to Discord with your app's token
 client.login(config.token);
 
@@ -909,6 +921,10 @@ client.on('message', async message => {
                     message.channel.send('Sorry you have no permission to do so');
                 }
             }
+            else if (cmd == 'updaterss') {
+                RSS();
+                message.channel.send('Updating RSS');
+            }
         }
     }
 
@@ -934,3 +950,17 @@ client.on('presenceUpdate', (oldMember, newMember)=> {
 });
 
 process.on('unhandledRejection', err => console.error(`Uncaught Promise Rejection: \n${err.stack}`));
+
+function RSS() {
+    client.guilds.get('439736642392162316').fetchMembers()
+        .then(async function(guild) {
+            for(let member of guild.members.filter(val => !val.user.bot).values()) {
+                for(let i = 0; i < 6; i++) {
+                    if (member.roles.filter(a => guild.roles.get(RSSrolelist[i]).position > a.position > guild.roles.get(RSSrolelist[i+1]).position)) {
+                        await member.addRole(RSSrolelist[i]).catch(console.error);
+                    }
+                }
+            }
+        })
+        .catch(console.error);
+}
