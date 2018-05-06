@@ -956,7 +956,7 @@ client.on('presenceUpdate', (oldMember, newMember)=> {
 process.on('unhandledRejection', err => console.error(`Uncaught Promise Rejection: \n${err.stack}`));
 
 function RSS() {
-    (client.guilds.get('439736642392162316').channels.get('440538596500307968') as TextChannel).send('Updating RSS!')
+    client.channels.get('440538596500307968').send('Updating RSS!');
     client.guilds.get('439736642392162316').fetchMembers()
         .then(async function(guild) {
             for(let member of guild.members.filter(val => !val.user.bot).values()) {
