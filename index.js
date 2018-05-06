@@ -956,7 +956,7 @@ function RSS() {
         .then(async function(guild) {
             for(let member of guild.members.filter(val => !val.user.bot).values()) {
                 for(let i = 0; i < 6; i++) {
-                    if (member.roles.filter(a => guild.roles.get(RSSrolelist[i]).position > a.position && a.position > guild.roles.get(RSSrolelist[i+1]).position)) {
+                    if (member.roles.filter(a => guild.roles.get(RSSrolelist[i]).position < a.position && a.position < guild.roles.get(RSSrolelist[i+1]).position)) {
                         await member.addRole(RSSrolelist[i]).catch(console.error);
                     }
                     else {
