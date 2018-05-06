@@ -1,5 +1,3 @@
-import { TextChannel } from 'discord.js';
-
 // setup global variables
 const config = require('./config.json');
 var simServer = 275235526330810369;
