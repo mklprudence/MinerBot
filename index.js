@@ -893,6 +893,22 @@ client.on('message', async message => {
                     message.channel.send('Sorry, you don\'t have the permission to do this');
                 }
             }
+            else if (cmd == 'servertransfer') {
+                if (isAdmin) {
+                    if (args[0] == 'rolelist') {
+                        message.channel.send('Role List in old Gaming Inc. Server');
+                        client.guilds.get('423877278510874644').fetchMembers()
+                            .then(function(guild) {
+                                for(let member of guild.members.values()) {
+                                    message.channel.send(`**${member.user.username}:**\n${member.roles.map(role => role.name).join('\n')}`);
+                                }
+                            });
+                    }
+                }
+                else {
+                    message.channel.send('Sorry you have no permission to do so');
+                }
+            }
         }
     }
 
