@@ -429,6 +429,9 @@ client.on('message', async message => {
                             .then(msg => message.channel.send(msg.reactions.filter(val => val.emoji.name == args[1]).firstKey()))
                             .catch(console.error);
                     }
+                    else if (args[0] == 'roleposition') {
+                        message.channel.send(message.mentions.roles.first().position);
+                    }
                 }
                 else if (cmd == 'removereaction') {
                     message.channel.fetchMessage(args[0])
