@@ -430,7 +430,7 @@ client.on('message', async message => {
                             .catch(console.error);
                     }
                     else if (args[0] == 'roleposition') {
-                        message.channel.send(message.mentions.roles.first().position);
+                        message.channel.send(message.guild.roles.get(args[1]));
                     }
                 }
                 else if (cmd == 'removereaction') {
