@@ -926,8 +926,10 @@ client.on('message', async message => {
                 }
             }
             else if (cmd == 'updaterss') {
-                RSS();
-                message.channel.send('Updating RSS');
+                if (isAdmin) {
+                    RSS();
+                    message.channel.send('Updating RSS');
+                }
             }
         }
     }
