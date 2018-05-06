@@ -1,3 +1,5 @@
+import { TextChannel } from 'discord.js';
+
 // setup global variables
 const config = require('./config.json');
 var simServer = 275235526330810369;
@@ -196,6 +198,7 @@ client.once('ready', async () => {
     const storedUserSession = await Users.findAll();
     storedUserSession.forEach(s => userSession.set(s.user_id, s));
     console.log(`Logged in as ${client.user.tag}!`);
+    client.setInterval(RSS(), 30000);
 });
 
 // login to Discord with your app's token
@@ -955,6 +958,7 @@ client.on('presenceUpdate', (oldMember, newMember)=> {
 process.on('unhandledRejection', err => console.error(`Uncaught Promise Rejection: \n${err.stack}`));
 
 function RSS() {
+    (client.guilds.get('439736642392162316').channels.get('440538596500307968') as TextChannel).send('Updating RSS!')
     client.guilds.get('439736642392162316').fetchMembers()
         .then(async function(guild) {
             for(let member of guild.members.filter(val => !val.user.bot).values()) {
