@@ -951,6 +951,7 @@ client.on('message', async message => {
                 else {
                     message.channel.send('You dont have permission to do so').then(msg => client.setTimeout(function(){msg.delete()}, 20000));
                 }
+                message.delete();
             }
         }
     }
