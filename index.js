@@ -469,6 +469,7 @@ client.on('message', async message => {
             let args = message.content.substring(prefix_GamingInc.length).split(' ');
             let cmd = args.shift();
             const isAdmin = message.member.hasPermission('ADMINISTRATOR');
+            const isHA = message.member.roles.has('439737576920711168');
 
             if (cmd == 'botinfo') {
                 if (true) {
