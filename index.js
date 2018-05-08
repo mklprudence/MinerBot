@@ -1003,7 +1003,7 @@ function RSS(member) {
             })
             .catch(console.error);
     }
-    else {
+    else if (!member.user.bot) {
         client.guilds.get('439736642392162316').fetchMember(member)
             .then(async function(memberfetched) {
                 for(let i = 0; i < 6; i++) {
