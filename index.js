@@ -978,7 +978,7 @@ client.on('presenceUpdate', (oldMember, newMember)=> {
 });
 
 client.on('guildMemberUpdate', (oldMember, newMember) => {
-    if (oldMember.roles.equals(newMember.roles.equals)) {
+    if (!oldMember.roles.equals(newMember.roles.equals)) {
         RSS(newMember);
     }
 });
