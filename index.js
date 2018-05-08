@@ -977,22 +977,54 @@ client.on('presenceUpdate', (oldMember, newMember)=> {
     }
 });
 
+client.on('guildMemberUpdate', (oldMember, newMember) => {
+    if (oldMember.roles.equals(newMember.roles.equals)) {
+        
+    }
+});
+
 process.on('unhandledRejection', err => console.error(`Uncaught Promise Rejection: \n${err.stack}`));
 
-function RSS() {
-    client.channels.get('440538596500307968').send('Updating RSS!');
-    client.guilds.get('439736642392162316').fetchMembers()
-        .then(async function(guild) {
-            for(let member of guild.members.filter(val => !val.user.bot).values()) {
-                for(let i = 0; i < 6; i++) {
-                    if (!member.roles.filter(a => (guild.roles.get(RSSrolelist[i]).position > a.position && a.position > guild.roles.get(RSSrolelist[i + 1]).position)).first()) {
-                        await member.removeRole(RSSrolelist[i]).catch(console.error);
-                    }
-                    else {
-                        await member.addRole(RSSrolelist[i]).catch(console.error);
+function RSS(member) {
+    if (!member) {
+        client.channels.get('440538596500307968').send('Updating RSS!');
+        client.guilds.get('439736642392162316').fetchMembers()
+            .then(async function(guild) {
+                for(let member of guild.members.filter(val => !val.user.bot).values()) {
+                    for(let i = 0; i < 6; i++) {
+                        if (!member.roles.filter(a => (guild.roles.get(RSSrolelist[i]).position > a.position && a.position > guild.roles.get(RSSrolelist[i + 1]).position)).first()) {
+                            await member.removeRole(RSSrolelist[i]).catch(console.error);
+                        }
+                        else {
+                            await member.addRole(RSSrolelist[i]).catch(console.error);
+                        }
                     }
                 }
-            }
-        })
-        .catch(console.error);
+            })
+            .catch(console.error);
+    }
+    else {
+        client.guilds.get('439736642392162316').fetchMember(member)
+            .then(async function(memberfetched) {
+                for(let i = 0; i < 6; i++) {
+                    if (!memberfetched.roles.filter(a => (client.guilds.get('439736642392162316').roles.get(RSSrolelist[i]).position > a.position && a.position > client.guilds.get('439736642392162316').roles.get(RSSrolelist[i + 1]).position)).first()) {
+                        await memberfetched.removeRole(RSSrolelist[i]).catch(console.error);
+                    }
+                    else {
+                        await memberfetched.addRole(RSSrolelist[i]).catch(console.error);
+                    }
+                }
+            })
+            .catch(console.error);
+        client.channels.get('440538596500307968').send({ embed: {
+            color: 16514816,
+            title: `${member.user.username}`,
+            description: `Updating RSS for ${member.user.username}`,
+            timestamp: new Date(),
+            footer: {
+                text: '©mklprudence',
+                icon_url: client.user.avatarURL,
+            },
+        } });
+    }
 }
