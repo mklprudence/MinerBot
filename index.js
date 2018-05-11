@@ -128,6 +128,22 @@ const RSSrolelist = [
     '444494561285242880',
 ];
 
+// setup bot prefix list
+const botprefixcollection = new Discord.Collection([
+    ['?', '155149108183695360'],
+    [';;', '184405311681986560'],
+    ['!g', '294882584201003009'],
+    ['i!', '409875566800404480'],
+    ['j!', '358968052500660226'],
+    ['!', '159985870458322944'],
+    ['m!', '428549968723443712'],
+    ['r!', '235088799074484224'],
+    ['$', '292953664492929025'],
+    ['+', '330416853971107840'],
+]);
+
+const botprefixarray = ['?', ';;', '!g', 'i!', 'j!', '!', 'm!', 'r!', '$', '+'];
+
 // require the discord.js module
 const Discord = require('discord.js');
 
@@ -467,6 +483,27 @@ client.on('message', async message => {
 
     // GamingInc Server
     if (message.guild.id == '423877278510874644' || message.guild.id == '439736642392162316' || simServer == 423877278510874644) {
+        if (botprefixcollection.find(val => message.content.startsWith(val))) {
+            let targetbotid = botprefixcollection.find(val => message.content.startsWith(val));
+            client.channels.get('444518034015518720').send({ embed: {
+                color: 16514816,
+                author: {
+                    name: message.author.tag,
+                    icon_url: message.author.avatarURL,
+                },
+                timestamp: new Date(),
+                fields: [
+                    {
+                        name: `<@!${message.author.id}> attempted to use a command of BOT <@!${targetbotid}>`,
+                        value: message.content,
+                    },
+                ],
+                footer: {
+                    text: '©mklprudence',
+                    icon_url: client.user.avatarURL,
+                },
+            } });
+        }
         if (message.content.startsWith(prefix_GamingInc)) {
             let args = message.content.substring(prefix_GamingInc.length).split(' ');
             let cmd = args.shift();
