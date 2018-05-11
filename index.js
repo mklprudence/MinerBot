@@ -491,7 +491,7 @@ client.on('message', async message => {
                     name: message.author.tag,
                     icon_url: message.author.avatarURL,
                 },
-                description: `**<@!${message.author.id}> attempted to use a command of BOT <@!${targetbotid.id}>**\n${message.content}`,
+                description: `**<@!${message.author.id}> attempted to use a command of BOT <@!${targetbotid.id}> in ${message.channel}**\n${message.content}`,
                 timestamp: new Date(),
                 footer: {
                     text: '©mklprudence',
