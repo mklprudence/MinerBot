@@ -491,13 +491,8 @@ client.on('message', async message => {
                     name: message.author.tag,
                     icon_url: message.author.avatarURL,
                 },
+                description: `**<@!${message.author.id}> attempted to use a command of BOT <@!${targetbotid}>**\n${message.content}`,
                 timestamp: new Date(),
-                fields: [
-                    {
-                        name: `<@${message.author.id}> attempted to use a command of BOT <@${targetbotid}>`,
-                        value: message.content,
-                    },
-                ],
                 footer: {
                     text: '©mklprudence',
                     icon_url: client.user.avatarURL,
