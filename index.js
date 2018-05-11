@@ -1061,6 +1061,7 @@ function RSS(member) {
                 }
             })
             .catch(console.error);
+        client.channels.get('440538596500307968').send(updated);
         if (updated) {
             client.channels.get('440538596500307968').send({ embed: {
                 color: 16514816,
