@@ -124,7 +124,8 @@ const RSSrolelist = [
     '440698334651482123',
     '440698578503991298',
     '440699557282709505',
-    '440532819958169601',
+    '444477142240329738',
+    '444494561285242880',
 ];
 
 // require the discord.js module
@@ -1006,7 +1007,7 @@ function RSS(member) {
     else if (!member.user.bot) {
         client.guilds.get('439736642392162316').fetchMember(member)
             .then(async function(memberfetched) {
-                for(let i = 0; i < 6; i++) {
+                for(let i = 0; i < RSSrolelist.length - 1; i++) {
                     if (!memberfetched.roles.filter(a => (client.guilds.get('439736642392162316').roles.get(RSSrolelist[i]).position > a.position && a.position > client.guilds.get('439736642392162316').roles.get(RSSrolelist[i + 1]).position)).first()) {
                         await memberfetched.removeRole(RSSrolelist[i]).catch(console.error);
                     }
