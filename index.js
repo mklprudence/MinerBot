@@ -197,8 +197,7 @@ client.once('ready', async () => {
     const storedUserSession = await Users.findAll();
     storedUserSession.forEach(s => userSession.set(s.user_id, s));
     console.log(`Logged in as ${client.user.tag}!`);
-    client.user.setActivity('MKLBot | m!help | v4.0.1', 'PLAYING')
-        .catch(console.error);
+    client.user.setActivity('MKLBot | m!help | v4.0.1', { type: 'PLAYING' }).catch(console.error);
     // client.setInterval(function() {RSS();}, 300000);
 });
 
