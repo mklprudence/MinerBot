@@ -864,7 +864,7 @@ client.on('message', async message => {
             }
             else if (cmd == 'userinfo') {
                 if (isAdmin) {
-                    var target;
+                    let target;
                     if (message.mentions.members.first()) {
                         target = message.mentions.members.first() || message.member;
                     }
@@ -912,6 +912,46 @@ client.on('message', async message => {
                 }
                 else {
                     message.channel.send('Sorry, you don\'t have the permission to do this');
+                }
+            }
+            else if (cmd == 'useredit') {
+                let target;
+                if (Number.isInteger(Number(args[0]))) {
+                    if (message.guild.members.get(args[0])) {
+                        target = message.guild.members.get(args[0]);
+                    }
+                    else {
+                        message.channel.send('Cannot retrieve Guildmember');
+                    }
+                }
+                else {
+                    return message.channel.send('Input valid Integral UserID').then(msg => msg.delete(10000));
+                }
+                if (args[1].toLowerCase() == 'nickname') {
+                    if (args.slice(2)) {
+                        target.setNickname(args.slice(2).join(' '));
+                    }
+                    else {
+                        return message.channel.send('Input valid nickname').then(msg => msg.delete(10000));
+                    }
+                }
+                else if (args[1].toLowerCase() == 'role' || args[1].toLowerCase() == 'roles') {
+                    let targetrole;
+                    if (message.mentions.roles.first()) {
+                        targetrole = message.mentions.roles.first();
+                    }
+                    else if (message.guild.roles.find('name', args.slice(2).join(' '))) {
+                        targetrole = message.guild.roles.find('name', args.slice(2).join(' '));
+                    }
+                    else {
+                        return message.channel.send('Cannot find role').then(msg => msg.delete(10000));
+                    }
+                    if (target.roles.has(targetrole.id)) {
+                        target.removeRole(targetrole);
+                    }
+                    else {
+                        target.addRole(targetrole);
+                    }
                 }
             }
             else if (cmd == 'servertransfer') {
