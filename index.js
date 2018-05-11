@@ -1046,27 +1046,32 @@ function RSS(member) {
             .catch(console.error);
     }
     else if (!member.user.bot) {
+        let updated = false;
         client.guilds.get('439736642392162316').fetchMember(member)
             .then(async function(memberfetched) {
                 for(let i = 0; i < RSSrolelist.length - 1; i++) {
                     if (!memberfetched.roles.filter(a => (client.guilds.get('439736642392162316').roles.get(RSSrolelist[i]).position > a.position && a.position > client.guilds.get('439736642392162316').roles.get(RSSrolelist[i + 1]).position)).first()) {
                         await memberfetched.removeRole(RSSrolelist[i]).catch(console.error);
+                        updated = true;
                     }
                     else {
                         await memberfetched.addRole(RSSrolelist[i]).catch(console.error);
+                        updated = true;
                     }
                 }
             })
             .catch(console.error);
-        client.channels.get('440538596500307968').send({ embed: {
-            color: 16514816,
-            title: `${member.user.tag}`,
-            description: `Updating RSS for ${member.user.username}`,
-            timestamp: new Date(),
-            footer: {
-                text: '©mklprudence',
-                icon_url: client.user.avatarURL,
-            },
-        } });
+        if (updated) {
+            client.channels.get('440538596500307968').send({ embed: {
+                color: 16514816,
+                title: `${member.user.tag}`,
+                description: `Updating RSS for ${member.user.username}`,
+                timestamp: new Date(),
+                footer: {
+                    text: '©mklprudence',
+                    icon_url: client.user.avatarURL,
+                },
+            } });
+        }
     }
 }
