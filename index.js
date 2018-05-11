@@ -483,15 +483,15 @@ client.on('message', async message => {
 
     // GamingInc Server
     if (message.guild.id == '423877278510874644' || message.guild.id == '439736642392162316' || simServer == 423877278510874644) {
-        if (botprefixcollection.find(val => message.content.startsWith(val))) {
-            const targetbotid = botprefixcollection.find(val => message.content.startsWith(val));
+        if (botprefixcollection.find(val => message.content.startsWith(val.prefix))) {
+            const targetbotid = botprefixcollection.find(val => message.content.startsWith(val.prefix));
             client.channels.get('444518034015518720').send({ embed: {
                 color: 16514816,
                 author: {
                     name: message.author.tag,
                     icon_url: message.author.avatarURL,
                 },
-                description: `**<@!${message.author.id}> attempted to use a command of BOT <@!${targetbotid}>**\n${message.content}`,
+                description: `**<@!${message.author.id}> attempted to use a command of BOT <@!${targetbotid.id}>**\n${message.content}`,
                 timestamp: new Date(),
                 footer: {
                     text: '©mklprudence',
