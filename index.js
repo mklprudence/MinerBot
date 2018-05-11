@@ -494,7 +494,7 @@ client.on('message', async message => {
                 timestamp: new Date(),
                 fields: [
                     {
-                        name: `<@!${message.author.id}> attempted to use a command of BOT <@!${targetbotid}>`,
+                        name: `<@${message.author.id}> attempted to use a command of BOT <@${targetbotid}>`,
                         value: message.content,
                     },
                 ],
