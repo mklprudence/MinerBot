@@ -1,3 +1,9 @@
+// require the discord.js module
+const Discord = require('discord.js');
+
+// create a new Discord client
+const client = new Discord.Client();
+
 // setup global variables
 const config = require('./config.json');
 var simServer = 275235526330810369;
@@ -143,12 +149,6 @@ const botprefixcollection = new Discord.Collection([
 ]);
 
 const botprefixarray = ['?', ';;', '!g', 'i!', 'j!', '!', 'm!', 'r!', '$', '+'];
-
-// require the discord.js module
-const Discord = require('discord.js');
-
-// create a new Discord client
-const client = new Discord.Client();
 
 // getting database
 const { Users } = require('./dbObjects');
@@ -484,7 +484,7 @@ client.on('message', async message => {
     // GamingInc Server
     if (message.guild.id == '423877278510874644' || message.guild.id == '439736642392162316' || simServer == 423877278510874644) {
         if (botprefixcollection.find(val => message.content.startsWith(val))) {
-            let targetbotid = botprefixcollection.find(val => message.content.startsWith(val));
+            const targetbotid = botprefixcollection.find(val => message.content.startsWith(val));
             client.channels.get('444518034015518720').send({ embed: {
                 color: 16514816,
                 author: {
