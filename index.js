@@ -1020,7 +1020,7 @@ function RSS(member) {
             .catch(console.error);
         client.channels.get('440538596500307968').send({ embed: {
             color: 16514816,
-            title: `${member.user.username}`,
+            title: `${member.user.tag}`,
             description: `Updating RSS for ${member.user.username}`,
             timestamp: new Date(),
             footer: {
