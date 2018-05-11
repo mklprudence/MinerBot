@@ -1046,6 +1046,7 @@ function RSS(member) {
             .catch(console.error);
     }
     else if (!member.user.bot) {
+        // updated still not working but still use sin la
         let updated = false;
         client.guilds.get('439736642392162316').fetchMember(member)
             .then(async function(memberfetched) {
@@ -1059,7 +1060,6 @@ function RSS(member) {
                 }
             })
             .catch(console.error);
-        client.channels.get('440538596500307968').send(updated);
         if (updated) {
             client.channels.get('440538596500307968').send({ embed: {
                 color: 16514816,
