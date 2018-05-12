@@ -824,7 +824,7 @@ client.on('message', async message => {
                 }
             }
             else if (cmd == 'lyrics') {
-                if (args[0].toLowerCase() == 'sou' || 'shape of you') {
+                if (args.join(' ').toLowerCase() == 'sou' || args.join(' ').toLowerCase() == 'shape of you') {
                     if (message.author.id == 377157652880293888 || message.author.id == 266401880362450944) {
                         message.channel.send({ embed: {
                             color: 16514816,
@@ -891,7 +891,7 @@ client.on('message', async message => {
                         message.channel.send('Sorry only JackIsBeast#0653 can access this command');
                     }
                 }
-                else if (args[0].toLowerCase() == 'gstq' || 'god save the queen') {
+                else if (args.join(' ').toLowerCase() == 'gstq' || args.join(' ').toLowerCase() == 'god save the queen') {
                     if (message.author.id == 320960993687765003 || isdev) {
                         message.channel.send({ embed: {
                             color: 16514816,
