@@ -911,6 +911,9 @@ client.on('message', async message => {
                         } });
                     }
                 }
+                else {
+                    message.channel.send('Please input valid song name / abbrev.');
+                }
             }
             else if (cmd == 'rickroll') {
                 if (message.author.id == 280678895714435072 || isAdmin) {
@@ -925,11 +928,11 @@ client.on('message', async message => {
             }
             else if (cmd == 'pingunsub') {
                 message.member.removeRole('440532819958169601');
-                message.channel.send(`Removed <@${message.author.id}> from the Ping role`);
+                message.channel.send(`Removed <@${message.author.id}> from the Ping role\nYou may resub using m!pingsub at anytime`);
             }
             else if (cmd == 'pingsub') {
                 message.member.addRole('440532819958169601');
-                message.channel.send(`Added <@${message.author.id}> to the Ping role`);
+                message.channel.send(`Added <@${message.author.id}> to the Ping role\nYou may unsub using m!pingunsub at anytime`);
             }
             else if (cmd == 'userinfo') {
                 if (isAdmin) {
