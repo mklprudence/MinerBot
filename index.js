@@ -825,7 +825,7 @@ client.on('message', async message => {
             }
             else if (cmd == 'lyrics') {
                 if (args.join(' ').toLowerCase() == 'sou' || args.join(' ').toLowerCase() == 'shape of you') {
-                    if (message.author.id == 377157652880293888 || message.author.id == 266401880362450944) {
+                    if (message.author.id == 377157652880293888 || isdev) {
                         message.channel.send({ embed: {
                             color: 16514816,
                             title: 'Shape of You Lyrics',
