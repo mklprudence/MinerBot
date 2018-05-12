@@ -121,6 +121,23 @@ const lyrics_SOU3 = [
     'Every day discovering something brand new',
     'I\'m in love with the shape of you',
 ];
+const lyrics_GSTQ = [
+    'God save our gracious Queen,',
+    'Long live our noble Queen,',
+    'God save the Queen:',
+    'Send her victorious,',
+    'Happy and glorious,',
+    'Long to reign over us:',
+    'God save the Queen.',
+    ' ',
+    'O Lord our God arise,',
+    'Scatter her enemies,',
+    'And make them fall:',
+    'Confound their politics,',
+    'Frustrate their knavish tricks,',
+    'On Thee our hopes we fix:',
+    'God save us all.',
+]
 
 // setup RSS
 const RSSrolelist = [
@@ -503,6 +520,7 @@ client.on('message', async message => {
             let cmd = args.shift();
             const isAdmin = message.member.hasPermission('ADMINISTRATOR');
             const isHA = message.member.roles.has('439737576920711168');
+            const isdev = message.author.id == 266401880362450944;
 
             if (cmd == 'botinfo') {
                 if (true) {
@@ -871,6 +889,26 @@ client.on('message', async message => {
                     }
                     else {
                         message.channel.send('Sorry only JackIsBeast#0653 can access this command');
+                    }
+                }
+                else if (args[0].toLowerCase() == 'gstq' || 'god save the queen') {
+                    if (message.author.id == 320960993687765003 || isdev) {
+                        message.channel.send({ embed: {
+                            color: 16514816,
+                            title: 'God Save the Queen Lyrics',
+                            description: 'Custom Command for <@!320960993687765003>\nGiveaway ID: 444392614532349962 on 12 May 2018',
+                            fields: [
+                                {
+                                    name: 'God Save the Queen',
+                                    value: lyrics_GSTQ.join('\n'),
+                                },
+                            ],
+                            timestamp: new Date(),
+                            footer: {
+                                text: '©mklprudence',
+                                icon_url: client.user.avatarURL,
+                            },
+                        } });
                     }
                 }
             }
