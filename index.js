@@ -148,8 +148,6 @@ const botprefixcollection = new Discord.Collection([
     ['+', { id: '330416853971107840', prefix: '+' }],
 ]);
 
-const botprefixarray = ['?', ';;', '!g', 'i!', 'j!', '!', 'm!', 'r!', '$', '+'];
-
 // getting database
 const { Users } = require('./dbObjects');
 const userSession = new Discord.Collection();
