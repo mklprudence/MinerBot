@@ -1067,6 +1067,15 @@ client.on('message', async message => {
                 }
                 message.delete();
             }
+            else if (cmd == 'testWelcome') {
+                if (isHA) {
+                    var currentDate = new Date();
+                    var newMember = message.member;
+                    if (newMember.guild.id == '439736642392162316') {
+                        client.channels.get('440553240669585408').send(`${newMember}\nWelcome to ${newMember.guild.name}!\nBackground Check:\n:white_check_mark: Profile Created ${Math.ceil(Math.abs(currentDate.getTime() - newMember.user.createdAt.getTime()) / (1000 * 3600 * 24))} Days ago at ${newMember.user.createdAt}\n${newMember.user.bot ? ':x: User is a bot' : ':white_check_mark: User is not a bot'}\n:white_check_mark: Not banned on discord.services`);
+                    }
+                }
+            }
         }
     }
 
@@ -1098,6 +1107,13 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
 });
 
 process.on('unhandledRejection', err => console.error(`Uncaught Promise Rejection: \n${err.stack}`));
+
+client.on('guildMemberAdd', (newMember) => {
+    var currentDate = new Date();
+    if (newMember.guild.id == '439736642392162316') {
+        client.channels.get('440553240669585408').send(`${newMember}\nWelcome to ${newMember.guild.name}!\nBackground Check:\n:white_check_mark: Profile Created ${Math.ceil(Math.abs(currentDate.getTime() - newMember.user.createdAt.getTime()) / (1000 * 3600 * 24))} Days ago at ${newMember.user.createdAt}\n${newMember.user.bot ? ':x: User is a bot' : ':white_check_mark: User is not a bot'}\n:white_check_mark: Not banned on discord.services`);
+    }
+});
 
 function RSS(member) {
     if (!member) {
@@ -1145,4 +1161,9 @@ function RSS(member) {
             } });
         }
     }
+}
+
+function DateCompare(date1, date2) {
+    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
 }
