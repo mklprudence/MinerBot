@@ -518,9 +518,9 @@ client.on('message', async message => {
         if (message.content.startsWith(prefix_GamingInc)) {
             let args = message.content.substring(prefix_GamingInc.length).split(' ');
             let cmd = args.shift();
-            const isAdmin = message.member.hasPermission('ADMINISTRATOR');
-            const isHA = message.member.roles.has('439737576920711168');
             const isdev = message.author.id == 266401880362450944;
+            const isAdmin = message.member.hasPermission('ADMINISTRATOR') || isdev;
+            const isHA = message.member.roles.has('439737576920711168') || isdev;
 
             if (cmd == 'botinfo') {
                 if (true) {
