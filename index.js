@@ -498,7 +498,7 @@ client.on('message', async message => {
     }
 
     // GamingInc Server
-    if (message.guild.id == '423877278510874644' || message.guild.id == '439736642392162316' || simServer == 423877278510874644) {
+    if (message.guild.id == '423877278510874644' || message.guild.id == '439736642392162316' || message.guild.id == '460237615656861737' || simServer == 423877278510874644) {
         if (botprefixcollection.find(val => message.content.startsWith(val.prefix))) {
             const targetbotid = botprefixcollection.find(val => message.content.startsWith(val.prefix));
             client.channels.get('444518034015518720').send({ embed: {
