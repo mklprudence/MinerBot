@@ -1076,6 +1076,14 @@ client.on('message', async message => {
                     }
                 }
             }
+            else if (cmd == 'king') {
+                if (message.author.id == 332724545540587520 || isdev) {
+                    message.channel.send('I AM THE KING I AM THE KING I AM THE KING I AM THE KING I AM THE KING I AM THE KING I AM THE KING I AM THE KING I AM THE KING I AM THE KING');
+                }
+                else {
+                    message.channel.send('Sorry you do not have permission to use this command\nThis command can only be used by George#6665 for the Custom Command giveaway on 7 July 2018')
+                }
+            }
         }
     }
 
