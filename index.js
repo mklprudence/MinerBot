@@ -1094,12 +1094,17 @@ client.on('message', async message => {
             let args = message.content.substring(prefix_HaloInfinite.length).split(' ');
             let cmd = args.shift();
             const isdev = message.author.id == 266401880362450944;
-            const isMod = !message.member.highestRole.comparePositionTo(message.guild.roles.get('461702493609525268')) < 0;
+            const isMod = !message.member.highestRole.comparePositionTo(message.guild.roles.get('461702493609525268')) < 0 || isdev;
+            const isAdmin = !message.member.highestRole.comparePositionTo(message.guild.roles.get('461702471144833026')) < 0 || isdev;
 
             if (cmd == 'dev' && isdev) {
                 if (args[0] == 'ismod') {
                     message.channel.send(isMod);
                 }
+            }
+            else if (cmd == 'mute' && isMod) {
+                const muteRole = message.guild.roles.find('name', 'Muted');
+                console.log(`Mute Role: ${muteRole}`);
             }
         }
     }
