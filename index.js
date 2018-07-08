@@ -15,142 +15,11 @@ var adminlist_PR = [config.ID_mklprud3nce, config.ID_bentuxthecow];
 var adminlist_GamingInc = [config.ID_mklprud3nce, config.ID_JackIsBeast];
 
 // setup prefix
-var prefix_default = config.prefix_default;
-var prefix_MinerClan = config.prefix_MinerClan;
-var prefix_PR = config.prefix_PR;
-var prefix_GamingInc = config.prefix_GamingInc;
-
-// setup lyrics
-const lyrics_SOU = [
-    'The club isn\'t the best place to find a lover',
-    'So the bar is where I go',
-    'Me and my friends at the table doing shots',
-    'Drinking fast and then we talk slow',
-    'Come over and start up a conversation with just me',
-    'And trust me I\'ll give it a chance now',
-    'Take my hand, stop, put Van the Man on the jukebox',
-    'And then we start to dance, and now I\'m singing like',
-    ' ',
-    'Girl, you know I want your love',
-    'Your love was handmade for somebody like me',
-    'Come on now, follow my lead',
-    'I may be crazy, don\'t mind me',
-    'Say, boy, let\'s not talk too much',
-    'Grab on my waist and put that body on me',
-    'Come on now, follow my lead',
-    'Come, come on now, follow my lead',
-];
-const lyrics_SOU1 = [
-    'I\'m in love with the shape of you',
-    'We push and pull like a magnet do',
-    'Although my heart is falling too',
-    'I\'m in love with your body',
-    'And last night you were in my room',
-    'And now my bedsheets smell like you',
-    'Every day discovering something brand new',
-    'I\'m in love with your body',
-    'Oh—I—oh—I—oh—I—oh—I',
-    'I\'m in love with your body',
-    'Oh—I—oh—I—oh—I—oh—I',
-    'I\'m in love with your body',
-    'Oh—I—oh—I—oh—I—oh—I',
-    'I\'m in love with your body',
-    'Every day discovering something brand new',
-    'I\'m in love with the shape of you',
-    ' ',
-    'One week in we let the story begin',
-    'We\'re going out on our first date',
-    'You and me are thrifty, so go all you can eat',
-    'Fill up your bag and I fill up a plate',
-    'We talk for hours and hours about the sweet and the sour',
-    'And how your family is doing okay',
-    'Leave and get in a taxi, then kiss in the backseat',
-    'Tell the driver make the radio play, and I\'m singing like',
-];
-const lyrics_SOU2 = [
-    'Girl, you know I want your love',
-    'Your love was handmade for somebody like me',
-    'Come on now, follow my lead',
-    'I may be crazy, don\'t mind me',
-    'Say, boy, let\'s not talk too much',
-    'Grab on my waist and put that body on me',
-    'Come on now, follow my lead',
-    'Come, come on now, follow my lead',
-    ' ',
-    'I\'m in love with the shape of you',
-    'We push and pull like a magnet do',
-    'Although my heart is falling too',
-    'I\'m in love with your body',
-    'And last night you were in my room',
-    'And now my bedsheets smell like you',
-    'Every day discovering something brand new',
-    'I\'m in love with your body',
-    'Oh—I—oh—I—oh—I—oh—I',
-    'I\'m in love with your body',
-    'Oh—I—oh—I—oh—I—oh—I',
-    'I\'m in love with your body',
-    'Oh—I—oh—I—oh—I—oh—I',
-    'I\'m in love with your body',
-    'Every day discovering something brand new',
-    'I\'m in love with the shape of you',
-];
-const lyrics_SOU3 = [
-    'Come on, be my baby, come on',
-    'Come on, be my baby, come on',
-    'Come on, be my baby, come on',
-    'Come on, be my baby, come on',
-    'Come on, be my baby, come on',
-    'Come on, be my baby, come on',
-    'Come on, be my baby, come on',
-    'Come on, be my baby, come on',
-    ' ',
-    'I\'m in love with the shape of you',
-    'We push and pull like a magnet do',
-    'Although my heart is falling too',
-    'I\'m in love with your body',
-    'And last night you were in my room',
-    'And now my bedsheets smell like you',
-    'Every day discovering something brand new',
-    'I\'m in love with your body',
-    'Oh—I—oh—I—oh—I—oh—I',
-    'I\'m in love with your body',
-    'Oh—I—oh—I—oh—I—oh—I',
-    'I\'m in love with your body',
-    'Oh—I—oh—I—oh—I—oh—I',
-    'I\'m in love with your body',
-    'Every day discovering something brand new',
-    'I\'m in love with the shape of you',
-];
-const lyrics_GSTQ = [
-    'God save our gracious Queen,',
-    'Long live our noble Queen,',
-    'God save the Queen:',
-    'Send her victorious,',
-    'Happy and glorious,',
-    'Long to reign over us:',
-    'God save the Queen.',
-    ' ',
-    'O Lord our God arise,',
-    'Scatter her enemies,',
-    'And make them fall:',
-    'Confound their politics,',
-    'Frustrate their knavish tricks,',
-    'On Thee our hopes we fix:',
-    'God save us all.',
-]
-
-// setup RSS
-const RSSrolelist = [
-    '440699202251784192',
-    '440698928330178571',
-    '440698717725655040',
-    '444850946569273351',
-    '440698334651482123',
-    '440698578503991298',
-    '440699557282709505',
-    '444477142240329738',
-    '444494561285242880',
-];
+const prefix_default = config.prefix_default;
+const prefix_MinerClan = config.prefix_MinerClan;
+const prefix_PR = config.prefix_PR;
+const prefix_GamingInc = config.prefix_GamingInc;
+const prefix_HaloInfinite = config.prefix_HaloInfinite;
 
 // setup bot prefix list
 const botprefixcollection = new Discord.Collection([
@@ -170,7 +39,7 @@ const botprefixcollection = new Discord.Collection([
 const { Users } = require('./dbObjects');
 const userSession = new Discord.Collection();
 
-// Helper functions
+// login Helper functions
 Reflect.defineProperty(userSession, 'login', {
     value: async function login(id) {
         const user = userSession.get(id);
@@ -499,6 +368,138 @@ client.on('message', async message => {
 
     // GamingInc Server
     if (message.guild.id == '423877278510874644' || message.guild.id == '439736642392162316' || message.guild.id == '460237615656861737' || simServer == 423877278510874644) {
+        // setup lyrics
+        const lyrics_SOU = [
+            'The club isn\'t the best place to find a lover',
+            'So the bar is where I go',
+            'Me and my friends at the table doing shots',
+            'Drinking fast and then we talk slow',
+            'Come over and start up a conversation with just me',
+            'And trust me I\'ll give it a chance now',
+            'Take my hand, stop, put Van the Man on the jukebox',
+            'And then we start to dance, and now I\'m singing like',
+            ' ',
+            'Girl, you know I want your love',
+            'Your love was handmade for somebody like me',
+            'Come on now, follow my lead',
+            'I may be crazy, don\'t mind me',
+            'Say, boy, let\'s not talk too much',
+            'Grab on my waist and put that body on me',
+            'Come on now, follow my lead',
+            'Come, come on now, follow my lead',
+        ];
+        const lyrics_SOU1 = [
+            'I\'m in love with the shape of you',
+            'We push and pull like a magnet do',
+            'Although my heart is falling too',
+            'I\'m in love with your body',
+            'And last night you were in my room',
+            'And now my bedsheets smell like you',
+            'Every day discovering something brand new',
+            'I\'m in love with your body',
+            'Oh—I—oh—I—oh—I—oh—I',
+            'I\'m in love with your body',
+            'Oh—I—oh—I—oh—I—oh—I',
+            'I\'m in love with your body',
+            'Oh—I—oh—I—oh—I—oh—I',
+            'I\'m in love with your body',
+            'Every day discovering something brand new',
+            'I\'m in love with the shape of you',
+            ' ',
+            'One week in we let the story begin',
+            'We\'re going out on our first date',
+            'You and me are thrifty, so go all you can eat',
+            'Fill up your bag and I fill up a plate',
+            'We talk for hours and hours about the sweet and the sour',
+            'And how your family is doing okay',
+            'Leave and get in a taxi, then kiss in the backseat',
+            'Tell the driver make the radio play, and I\'m singing like',
+        ];
+        const lyrics_SOU2 = [
+            'Girl, you know I want your love',
+            'Your love was handmade for somebody like me',
+            'Come on now, follow my lead',
+            'I may be crazy, don\'t mind me',
+            'Say, boy, let\'s not talk too much',
+            'Grab on my waist and put that body on me',
+            'Come on now, follow my lead',
+            'Come, come on now, follow my lead',
+            ' ',
+            'I\'m in love with the shape of you',
+            'We push and pull like a magnet do',
+            'Although my heart is falling too',
+            'I\'m in love with your body',
+            'And last night you were in my room',
+            'And now my bedsheets smell like you',
+            'Every day discovering something brand new',
+            'I\'m in love with your body',
+            'Oh—I—oh—I—oh—I—oh—I',
+            'I\'m in love with your body',
+            'Oh—I—oh—I—oh—I—oh—I',
+            'I\'m in love with your body',
+            'Oh—I—oh—I—oh—I—oh—I',
+            'I\'m in love with your body',
+            'Every day discovering something brand new',
+            'I\'m in love with the shape of you',
+        ];
+        const lyrics_SOU3 = [
+            'Come on, be my baby, come on',
+            'Come on, be my baby, come on',
+            'Come on, be my baby, come on',
+            'Come on, be my baby, come on',
+            'Come on, be my baby, come on',
+            'Come on, be my baby, come on',
+            'Come on, be my baby, come on',
+            'Come on, be my baby, come on',
+            ' ',
+            'I\'m in love with the shape of you',
+            'We push and pull like a magnet do',
+            'Although my heart is falling too',
+            'I\'m in love with your body',
+            'And last night you were in my room',
+            'And now my bedsheets smell like you',
+            'Every day discovering something brand new',
+            'I\'m in love with your body',
+            'Oh—I—oh—I—oh—I—oh—I',
+            'I\'m in love with your body',
+            'Oh—I—oh—I—oh—I—oh—I',
+            'I\'m in love with your body',
+            'Oh—I—oh—I—oh—I—oh—I',
+            'I\'m in love with your body',
+            'Every day discovering something brand new',
+            'I\'m in love with the shape of you',
+        ];
+        const lyrics_GSTQ = [
+            'God save our gracious Queen,',
+            'Long live our noble Queen,',
+            'God save the Queen:',
+            'Send her victorious,',
+            'Happy and glorious,',
+            'Long to reign over us:',
+            'God save the Queen.',
+            ' ',
+            'O Lord our God arise,',
+            'Scatter her enemies,',
+            'And make them fall:',
+            'Confound their politics,',
+            'Frustrate their knavish tricks,',
+            'On Thee our hopes we fix:',
+            'God save us all.',
+        ]
+
+        // setup RSS
+        const RSSrolelist = [
+            '440699202251784192',
+            '440698928330178571',
+            '440698717725655040',
+            '444850946569273351',
+            '440698334651482123',
+            '440698578503991298',
+            '440699557282709505',
+            '444477142240329738',
+            '444494561285242880',
+        ];
+        
         if (botprefixcollection.find(val => message.content.startsWith(val.prefix))) {
             const targetbotid = botprefixcollection.find(val => message.content.startsWith(val.prefix));
             client.channels.get('444518034015518720').send({ embed: {
@@ -1082,6 +1083,22 @@ client.on('message', async message => {
                 }
                 else {
                     message.channel.send('Sorry you do not have permission to use this command\nThis command can only be used by George#6665 for the Custom Command giveaway on 7 July 2018')
+                }
+            }
+        }
+    }
+
+    // Halo Infinite Server
+    if (message.guild.id == '461679432151859210') {
+        if (message.content.startsWith(prefix_HaloInfinite)) {
+            let args = message.content.substring(prefix_HaloInfinite.length).split(' ');
+            let cmd = args.shift();
+            const isdev = message.author.id == 266401880362450944;
+            const isMod = message.member.highestRole.comparePositionTo(message.guild.roles.get('461702493609525268'));
+
+            if (cmd == 'dev' && isdev) {
+                if (args[0] == 'ismod') {
+                    message.channel.send(isMod);
                 }
             }
         }
