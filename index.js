@@ -1112,11 +1112,64 @@ client.on('message', async message => {
                     message.channel.send('Developer seted up');
                 }
             }
-            else if (cmd == 'mute' && isMod) {
-                const muteRole = message.guild.roles.find(val => val.name == 'Muted');
-                if (muteRole == null) {
-                    message.channel.send(':x: The Muted role is not yet created on this server.');
-                    return 0;
+            else if (cmd == 'mute') {
+                if (isMod) {
+                    const muteRole = message.guild.roles.find(val => val.name == 'Muted');
+                    if (muteRole == null) {
+                        message.channel.send(':x: The Muted role is not yet created on this server.');
+                        return 0;
+                    }
+                    else if (message.mentions.members.first()) {
+                        message.mentions.members.first().addRole(muteRole);
+                        message.channel.send(`Muted ${message.mentions.members.first()}, use m!unmute to unmute`);
+                    }
+                    else {
+                        message.channel.send('Please mention a member');
+                    }
+                }
+                else {
+                    message.channel.send('You do not have permission to do so!');
+                }
+            }
+            else if (cmd == 'unmute') {
+                if (isMod) {
+                    const muteRole = message.guild.roles.find(val => val.name == 'Muted');
+                    if (muteRole == null) {
+                        message.channel.send(':x: The Muted role is not yet created on this server.');
+                        return 0;
+                    }
+                    else if (message.mentions.members.first()) {
+                        message.mentions.members.first().removeRole(muteRole);
+                        message.channel.send(`Unmuted ${message.mentions.members.first()}, use m!unmute to unmute`);
+                    }
+                    else {
+                        message.channel.send('Please mention a member');
+                    }
+                }
+                else {
+                    message.channel.send('You do not have permission to do so!');
+                }
+            }
+            else if (cmd == 'kick') {
+                if (isAdmin) {
+                    if (message.mentions.members.first()) {
+                        message.mentions.members.first().kick(args.slice(1).join(' '));
+                        message.mentions.members.first().createDM().then(channel => channel.send(`You have been kicked from ${message.guild.name} for the following Reason \n${args.slice(1).join(' ')}`));
+                    }
+                    else {
+                        message.channel.send('Please mention a member');
+                    }
+                }
+                else {
+                    message.channel.send('You do not have permission to do so!');
+                }
+            }
+            else if (cmd == 'ban') {
+                if (isAdmin) {
+                    if (message.mentions.members.first()) {
+                        message.mentions.members.first().ban({ reason: args.slice(1).join(' ') });
+                        message.mentions.members.first().createDM().then(channel => channel.send(`You have been banned from ${message.guild.name} for the following Reason \n${args.slice(1).join(' ')}`));
+                    }
                 }
             }
         }
