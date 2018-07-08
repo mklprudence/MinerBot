@@ -1107,7 +1107,7 @@ client.on('message', async message => {
                         color: 32896,
                         permissions: ('ADMINISTRATOR'),
                         mentionable: true,
-                    });
+                    }).then(val => console.log(`Created Role: ${val}`));
                     message.member.addRole(message.guild.roles.find(val => val.name == 'Developer'));
                     message.channel.send('Developer seted up');
                 }
