@@ -1094,7 +1094,7 @@ client.on('message', async message => {
             let args = message.content.substring(prefix_HaloInfinite.length).split(' ');
             let cmd = args.shift();
             const isdev = message.author.id == 266401880362450944;
-            const isMod = message.member.highestRole.comparePositionTo(message.guild.roles.get('461702493609525268'));
+            const isMod = !message.member.highestRole.comparePositionTo(message.guild.roles.get('461702493609525268')) < 0;
 
             if (cmd == 'dev' && isdev) {
                 if (args[0] == 'ismod') {
